@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="./Assets/Logo/Friendly Snakes logo simples White.png" type="image/x-icon">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="./CSS/Style.css">
+
+    <title>Friendly Snakes</title>
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="container-header-itens">
+            <img src="./Assets/Logo/Friendly Snakes logo White.png" alt="">
+            <div>x</div>
+        </div>
+
+    </header>
+
+    <div class="tela">
+        <fieldset class="fieldset-padrao">
+            <legend class="legend-sobre-o-projeto">Sobre o Projeto</legend>
+            <span class="texto-sobre-o-projeto">
+                Ofídios, conhecidos como cobras ou serpentes, integram o grupo dos répteis, totalizando cerca de 2.900
+                espécies globalmente, com 321 espécies presentes na fauna brasileira. Encontradas em uma variedade de
+                ambientes, desempenham um papel vital como predadores, controlando populações de pragas como aranhas,
+                ratos e aves.
+                Apesar de sua importância ecológica, as cobras enfrentam um considerável preconceito na sociedade,
+                frequentemente baseado em mitos e desconhecimento. Esse estigma resulta em ações prejudiciais, como a
+                perseguição indiscriminada, inclusive de espécies inofensivas.<br><br>
+                A conscientização e a educação surgem como ferramentas cruciais para superar esses preconceitos.
+                Compreender a diversidade e a relevância das cobras nos ecossistemas, aliado ao conhecimento sobre
+                espécies locais, é fundamental para uma coexistência pacífica. É importante notar que a maioria das
+                cobras não representa uma ameaça significativa para os seres humanos.<br><br>
+                Além disso, a conservação das cobras é essencial, pois muitas são vítimas de tráfico e caça ilegais,
+                contribuindo para o declínio de suas populações e impactando ecossistemas. Nesse contexto, o projeto
+                Friendly Snakes, desenvolvido por Ryan Miranda Barbosa, emerge como uma iniciativa valiosa. 
+                Esta aplicação web busca desmitificar, educar e promover a conservação, oferecendo informações sobre espécies
+                brasileiras e combatendo mitos, com o objetivo de fomentar o respeito por esses animais e contribuir
+                para a sustentabilidade dos ecossistemas e da falna Brasileira.
+            </span>
+        </fieldset>
+        <fieldset class="fieldset-padrao">
+            <legend class="legend-analytics">Analytics</legend>
+            <div class="dashboard">
+                <span>
+                    Como as pessoas se sentiam em relação as cobras antes de conhecer o projeto Friendly Snakes
+                </span>
+                <div class="grafico">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+            <div class="dashboard">
+                <span>
+                    Como as pessoas se sentem em relação as cobras após conhecer e usar o projeto Friendly Snakes
+                </span>
+                <div class="grafico">
+
+                </div>
+            </div>
+            <div class="dashboard">
+                <span>
+                    Comparação
+                </span>
+                <div class="grafico">
+
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</body>
+
+<script>
+     const ctx = document.getElementById('myChart');
+
+new Chart(ctx, {
+  type: 'pie',
+  data: {
+  labels: [
+    'Red',
+    'Blue',
+    'Yellow'
+  ],
+  datasets: [{
+    label: 'My First Dataset',
+    data: [300, 50, 100],
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)'
+    ],
+    hoverOffset: 4
+  }]
+}});
+</script>
+
+</html>

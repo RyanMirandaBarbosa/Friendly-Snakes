@@ -3,109 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="shortcut icon" href="./Assets/Logo/Friendly Snakes logo simples White.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="./CSS/Style.css">
+
     <title>Login</title>
-    <style>
-        @import url(https://db.onlinewebfonts.com/c/0b9856633d4311a19df074ea509d8390?family=Constantia);
 
-        * {
-            margin: 0px;
-            padding: 0px;
-            font-family: "Constantia";
-            color: white;
-        }
-
-        body {
-            background-color: #474747;
-        }
-
-        .tela {
-            width: 100%;
-            height: auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-
-        .container-login {
-            margin: 150px;
-            padding: 30px;
-            width: 800px;
-            height: auto;
-            background-color: #676767;
-            border-width: 5px 3px 0px 3px;
-            border-style: solid;
-            border-color: white;
-            border-radius: 50px 10px 50px 10px;
-            box-shadow: 0px 0px 10px 10px rgba(39, 39, 39, 0.25);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        
-        legend {
-            width: 170px;
-            font-size: 50px;
-            text-align: center;
-        }
-
-        .container-inputs {
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-direction: column;
-            margin-bottom: 30px;
-        }
-
-        .logo-footer {
-            margin-top: 50px;
-            width: 100%;
-        }
-
-        button {
-            background-color: #676767;
-            border-width: 5px 3px 0px 3px;
-            border-style: solid;
-            border-color: white;
-            border-radius: 50px 10px 50px 10px;
-            box-shadow: 0px 0px 10px 10px rgba(39, 39, 39, 0.25);
-        }
-
-        input {
-            background-color: #676767;
-            border-width: 5px 3px 0px 3px;
-            border-style: solid;
-            border-color: white;
-            border-radius: 50px 10px 50px 10px;
-            box-shadow: 0px 0px 10px 10px rgba(39, 39, 39, 0.25);
-        }
-    </style>
 </head>
 <body>
-    <div class="tela">
-        <fieldset class="container-login">
-            <legend>Login</legend>
-            <div class="container-inputs">
+
+     <div class="tela">
+
+        <fieldset class="fieldset-login-cadastro">
+
+            <legend class="legend-login">Login</legend>
+
+            <div class="container-inputs-pai">
+
                 <div class="container-inputs">
                     Email
                     <input type="text">
                 </div>
                 <div class="container-inputs">
                     Senha
-                    <input type="text">
+                    <input type="password">
                 </div>
                 <div class="container-inputs">
-                    <button>Logar</button>
-                    <a href="">Clique aqui para cadastrar-se</a>
+                    <button class="button-login">Logar</button>
+                    <a href="./Cadastro.html">Clique aqui para cadastrar-se</a>
                 </div>
+
             </div>
+
             <div class="logo-footer">
                 <img src="./Assets/Logo/Friendly Snakes logo White.png" alt="Friendly Snakes">
             </div>
+
         </fieldset>
+
   </div>
 </body>
 </html>
