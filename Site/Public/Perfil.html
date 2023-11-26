@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <!-- fivcon - icon da aba do navegador -->
+        <link rel="shortcut icon" href="./Assets/Logo/Friendly Snakes logo simples White.png" type="image/x-icon">
+    
+        <!-- CSS -->
+        <link rel="stylesheet" href="./CSS/Style.css">
+    
+        <!-- script -->
+        <script src="JS/JS.js"></script>
+    
+        <!-- bootstrap icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    
+        <title>Perfil | Friendly Snakes</title>
+    </head>
+<body>
+    <header>
+
+        <div class="container-header-itens">
+            <img src="./Assets/Logo/Friendly Snakes logo White.png" alt="">
+
+            <button onclick="exibir_menu()">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <div id="menu">
+
+                <button onclick="fechar_menu()">
+                    <i class="bi bi-list"></i>
+                </button>
+                
+        <div class="nome">Ryan Miranda Barbosa</div>
+    
+            <div class="tela">
+                <div class="nav-bar">
+                    <ul>
+                        <li><a href="Perfil.html">Perfil</a></li>
+                        <li><a href="Sobre o Projeto.html">Sobre o Projeto</a></li>
+                        <li><a href="Conhecimento.html">Mitos & Conhecimento</a></li>
+                        <li><a href="Catálogo de Espécies.html">Especies Brasileiras</a></li>
+                        <li><a href="Fórum.html">Forum</a></li>
+                        <li><a href="">Sair</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </header>
+    <div class="tela">
+        <div class="card-padrao">
+            <div class="nome">Ryan Miranda Barbosa</div>
+            <div class="line"></div>
+            
+            <div class="titulo">Espécies favorita</div>
+            <div></div>
+            <div class="line"></div>
+
+            <div class="titulo">Pesquisas</div>
+            <div class="texto">
+                Antes de conhecer o projeto Friendly Snakes, como você se sentia em relação as cobras?
+            </div>
+            <div><button onclick="exibir_pesquisa1()">Responder</button></div>
+            <div class="texto">
+                Após conhecer o projeto Friendly Snakes, como você se sente agora em relação as cobras?
+            </div>
+            <div><button onclick="exibir_pesquisa2()">Responder</button></div>
+        </div>
+
+        <div id="pesquisa1">
+            <div class="close">
+                <button onclick="fechar_pesquisa1()">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="nome">Pesquisa 1</div>
+            <div class="line"></div>
+
+            <div class="pesquisa">
+
+                <div class="pesquisa-align">
+                    <span>Muito Tranquilo</span>
+                    <input type="checkbox">
+                </div>
+                <div class="pesquisa-align">
+                    <span>Tranquilo</span>
+                    <input type="checkbox">
+                </div>
+                <div class="pesquisa-align">
+                    <span>Neutro</span>
+                    <input type="checkbox">
+                </div>
+                <div class="pesquisa-align">
+                    <span>Medo</span>
+                    <input type="checkbox">
+                </div>
+                <div class="pesquisa-align">
+                    <span>Muito Medo</span>
+                    <input type="checkbox">
+                </div>
+
+            </div>
+
+            <div><button>Responder</button></div>
+        </div>
+
+        <div id="pesquisa2">
+            <div class="close">
+                <button onclick="fechar_pesquisa2()">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="nome">Pesquisa 2</div>
+            <div class="line"></div>
+
+            <div class="pesquisa">
+
+                <div class="pesquisa-align">
+                    <span>Muito Tranquilo</span>
+                    <input type="checkbox">
+                </div>
+                <div class="pesquisa-align">
+                    <span>Tranquilo</span>
+                    <input type="checkbox">
+                </div>
+                <div class="pesquisa-align">
+                    <span>Neutro</span>
+                    <input type="checkbox">
+                </div>
+                <div class="pesquisa-align">
+                    <span>Medo</span>
+                    <input type="checkbox">
+                </div>
+                <div class="pesquisa-align">
+                    <span>Muito Medo</span>
+                    <input type="checkbox">
+                </div>
+
+            </div>
+
+            <div><button>Responder</button></div>
+        </div>
+
+    </div>
+</body>
+</html>
