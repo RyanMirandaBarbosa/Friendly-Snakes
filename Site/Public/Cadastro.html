@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,13 +12,14 @@
     <link rel="stylesheet" href="./CSS/Style.css">
 
     <!-- script -->
-    <script src=""></script>
+    <script src="./JS/Sessao.js"></script>
 
     <title>Cadastro | Friendly Snakes</title>
 </head>
+
 <body>
 
-     <div class="tela">
+    <div class="tela">
 
         <fieldset class="fieldset-login-cadastro">
 
@@ -27,36 +29,50 @@
 
                 <div class="container-inputs">
                     Nome
-                    <input type="text">
+                    <input type="text" id="input_nome">
+                    <span id="nome_vazio" class="erro">*Campo vazio*</span>
                 </div>
 
                 <div class="container-inputs">
                     Sobrenome
-                    <input type="text">
+                    <input type="text" id="input_sobrenome">
+                    <span id="sobrenome_vazio" class="erro">*Campo vazio*</span>
                 </div>
 
                 <div class="container-inputs">
                     Email
-                    <input type="text">
+                    <input type="text" id="input_email">
+                    <span id="email_vazio" class="erro">*Campo vazio*</span>
+                    <span id="email_erro" class="erro">*Email invalido*</span>
                 </div>
 
                 <div class="container-inputs">
                     Confirmar Email
-                    <input type="text">
+                    <input type="text" id="input_confirmar_email">
+                    <span id="confirmar_email_vazio" class="erro">*Campo vazio*</span>
+                    <span id="confirmar_email_erro" class="erro">*Email diferente*</span>
                 </div>
 
                 <div class="container-inputs">
                     Senha
-                    <input type="text">
+                    <input type="text" id="input_senha">
+                    <span id="senha_vazio" class="erro">*Campo vazio*</span>
+                    <span id="senha_erro" class="erro">*Senha invalido*</span>
                 </div>
 
                 <div class="container-inputs">
                     Confirmar Senha
-                    <input type="text">
+                    <input type="text" id="input_confirmar_senha">
+                    <span id="confirmar_senha_vazio" class="erro">*Campo vazio*</span>
+                    <span id="confirmar_senha_erro" class="erro">*Senha diferente*</span>
                 </div>
 
                 <div class="container-inputs">
-                    <button class="button-cadastrar">cadastrar</button>
+                    <button onclick="cadastrar()" class="button-cadastrar">cadastrar</button>
+                </div>
+
+                <div id="loading" class="loading">
+                    <img src="./Assets/Icons/loading.gif" alt="">
                 </div>
 
             </div>
@@ -69,4 +85,169 @@
 
     </div>
 </body>
+
 </html>
+
+<script>
+    function cadastrar() {
+        aguardar();
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nome = input_nome.value;
+        var sobrenome = input_sobrenome.value;
+        var email = input_email.value;
+        var confirmarEmail = input_confirmar_email.value;
+        var senha = input_senha.value;
+        var confirmarSenha = input_confirmar_senha.value;
+
+        var nomeValido = false;
+        var sobrenome = false;
+        var emailPreenchido = false;
+        var emailValido = false;
+        var confirmacaoEmail = false;
+        var emailIgual = false;
+        var senhaPreenchida = false;
+        var senhaValida = false;
+        var confirmacaoSenha = false;
+        var senhaIgual = false;
+
+        if (nome == "") {
+            nome_vazio.style.display = 'flex';
+        } else {
+            nomeValido = true;
+        }
+
+        if (sobrenome == "") {
+            sobrenome_vazio.style.display = 'flex';
+        } else {
+            sobrenome = true;
+        }
+
+        if (email == "") {
+            email_vazio.style.display = 'flex';
+        } else {
+            emailPreenchido = true;
+        }
+
+
+        if (confirmarEmail == "") {
+            confirmar_email_vazio.style.display = 'flex';
+        } else {
+            confirmacaoEmail = true;
+        }
+
+
+        if (senha == "") {
+            senha_vazio.style.display = 'flex';
+        } else {
+            var senhaPreenchida = true;
+        }
+
+
+        if (confirmarSenha == "") {
+            confirmar_senha_vazio.style.display = 'flex';
+        } else {
+            var confirmacaoSenha = true;
+        }
+
+        if (emailPreenchido) {
+            if (email.indexOf("@") <= 0 && email.indexOf(".com") <= 0) {
+                email_erro.style.display = 'flex';
+            } else {
+                emailValido = true;
+            }
+        }
+        if (confirmacaoEmail) {
+            if (confirmarEmail != email) {
+                confirmar_email_erro.style.display = 'flex';
+            } else {
+                emailIgual = true;
+            }
+        }
+        if (senhaPreenchida) {
+            if (senha < 6) {
+                senha_erro.style.display = 'flex';
+            } else {
+                var senhaValida = true;
+            }
+        }
+        if (confirmacaoSenha) {
+            if (confirmarSenha != senha) {
+                confirmar_senha_erro.style.display = 'flex';
+            } else {
+                var senhaIgual = true;
+            }
+        }
+
+
+        if (nome) {
+            finalizarAguardar();
+            return false;
+        } else {
+            setInterval(sumirMensagem, 5000);
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nomeVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+                empresaServer: empresaVar,
+                cpfServer: cpfVar
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    cardErro.style.display = "block";
+
+                    mensagem_erro.innerHTML =
+                        "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                    setTimeout(() => {
+                        window.location = "login.html";
+                    }, "2000");
+
+                    limparFormulario();
+                    finalizarAguardar();
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                finalizarAguardar();
+            });
+
+        return false;
+    }
+
+    function listar() {
+        fetch("/empresas/listar", {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                resposta.json().then((empresas) => {
+                    empresas.forEach((empresa) => {
+                        listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
+                    });
+                });
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none";
+    }
+</script>

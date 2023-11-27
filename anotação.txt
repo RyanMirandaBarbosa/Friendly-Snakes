@@ -1,0 +1,128 @@
+var nomeValido = false;
+        var sobrenome = false;
+        var emailPreenchido = false;
+        var emailValido = false;
+        var confirmacaoEmail = false;
+        var emailIgual = false;
+        var senhaPreenchida = false;
+        var senhaValida = false;
+        var confirmacaoSenha = false;
+        var senhaIgual = false;
+
+        if (nome == "") {
+            nome_vazio.style.display = 'flex';
+        } else {
+            nomeValido = true;
+        }
+        if (sobrenome == "") {
+            sobrenome_vazio.style.display = 'flex';
+        } else {
+            sobrenome = true;
+        }    
+        if (email == "") {
+            email_vazio.style.display = 'flex';
+        } else {
+            emailPreenchido = true;
+        }
+        if (email.indexOf("@") <= 0 && email.indexOf(".com") <= 0) {
+            email_erro.style.display = 'flex';
+        } else {
+            emailValido = true;
+        } 
+        if (confirmarEmail == "") {
+            confirmar_email_vazio.style.display = 'flex';
+        } else {
+            confirmacaoEmail = true;
+        }
+        if (confirmarEmail != email) {
+            confirmar_email_erro.style.display = 'flex';
+        } else {
+            emailIgual = true;
+        }
+        if (senha == "") {
+            senha_vazio.style.display = 'flex';
+        } else {
+            var senhaPreenchida = true;
+        }
+        if (senha < 6) {
+            senha_erro.style.display = 'flex';
+        } else {
+            var senhaValida = true;
+        }
+        if (confirmarSenha == "") {
+            confirmar_senha_vazio.style.display = 'flex';
+        } else {
+            var confirmacaoSenha = true;
+        } 
+        if (confirmarSenha != senha) {
+            confirmar_senha_erro.style.display = 'flex';
+        } else {
+            var senhaIgual = true;
+        }
+
+
+
+
+if (nome == "") {
+            nome_vazio.style.display = 'flex';
+        }
+
+        if (sobrenome == "") {
+            sobrenome_vazio.style.display = 'flex';
+        }
+
+        if (email == "") {
+            email_vazio.style.display = 'flex';
+        }
+
+        if (confirmarEmail == "") {
+            confirmar_email_vazio.style.display = 'flex';
+        }
+
+        if (senha == "") {
+            senha_vazio.style.display = 'flex';
+        }
+
+        if (confirmarSenha == "") {
+            confirmar_senha_vazio.style.display = 'flex';
+        }
+
+<div class="container-inputs">
+                    Nome
+                    <input type="text" id="input_nome">
+                    <span id="nome_vazio" class="erro">*Campo vazio*</span>
+                </div>
+
+                <div class="container-inputs">
+                    Sobrenome
+                    <input type="text" id="input_sobrenome">
+                    <span id="sobrenome_vazio" class="erro">*Campo vazio*</span>
+                </div>
+
+                <div class="container-inputs">
+                    Email
+                    <input type="text" id="input_email">
+                    <span id="email_vazio" class="erro">*Campo vazio*</span>
+                    <span id="email_erro" class="erro"></span>
+                </div>
+
+                <div class="container-inputs">
+                    Confirmar Email
+                    <input type="text" id="input_confirmar_email">
+                    <span id="confirmar_email_vazio" class="erro">*Campo vazio*</span>
+                    <span id="confirmar_email_erro" class="erro"></span>
+                </div>
+
+                <div class="container-inputs">
+                    Senha
+                    <input type="text" id="input_senha">
+                    <span id="senha_vazio" class="erro">*Campo vazio*</span>
+                    <span id="senha_erro" class="erro"></span>
+                </div>
+
+                <div class="container-inputs">
+                    Confirmar Senha
+                    <input type="text" id="input_confirmar_senha">
+                    <span id="confirmar_senha_vazio" class="erro">*Campo vazio*</span>
+                    <span id="confirmar_senha_erro" class="erro"></span>
+                </div>

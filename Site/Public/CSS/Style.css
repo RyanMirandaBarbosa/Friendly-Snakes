@@ -561,6 +561,53 @@ header {
     box-shadow: 0px 0px 10px 10px rgba(39, 39, 39, 0.25);
 }
 
+#resposta {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    background-color: #676767;
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px;
+    height: auto;
+    border-width: 5px 3px 0px 3px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 50px 10px 50px 10px;
+    box-shadow: 0px 0px 10px 1000px rgba(39, 39, 39, 0.767);
+}
+
+#resposta button {
+    width: 150px;
+}
+
+#resposta .close button {
+    padding: 20px;
+    width: auto;
+    background-color: #00000000;
+    height: auto;
+    outline: none;
+    border: none;
+    border-width: none;
+    cursor: pointer;
+    font-size: 30px;
+    animation: none;
+}
+
+#resposta .close button:hover {
+    transition: 0s;
+    box-shadow: none;
+}
+
+#resposta .close button:active {
+    transition: 0s;
+    box-shadow: none;
+    transform: translateY(4px);
+}
+
 
 /* tags & animação */
 
@@ -653,4 +700,20 @@ input:hover {
     align-items: center;
     justify-content: space-between;
     font-size: 20px;
+}
+
+.loading {
+    display: none;
+}
+
+.loading img {
+    width: 100px;
+}
+
+.erro {
+    display: none;
+    height: 0px;
+    font-size: 15px;
+    color: #df3e3e;
+    font-weight: bold;
 }
