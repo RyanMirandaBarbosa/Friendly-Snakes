@@ -90,10 +90,7 @@
 
 <script>
     function cadastrar() {
-        aguardar();
-
-        //Recupere o valor da nova input pelo nome do id
-        // Agora vá para o método fetch logo abaixo
+  
         var nome = input_nome.value;
         var sobrenome = input_sobrenome.value;
         var email = input_email.value;
@@ -102,7 +99,7 @@
         var confirmarSenha = input_confirmar_senha.value;
 
         var nomeValido = false;
-        var sobrenome = false;
+        var sobrenomeValido = false;
         var emailPreenchido = false;
         var emailValido = false;
         var confirmacaoEmail = false;
@@ -115,18 +112,21 @@
         if (nome == "") {
             nome_vazio.style.display = 'flex';
         } else {
+            nome_vazio.style.display = 'none';
             nomeValido = true;
         }
 
         if (sobrenome == "") {
             sobrenome_vazio.style.display = 'flex';
         } else {
-            sobrenome = true;
+            sobrenome_vazio.style.display = 'none';
+            sobrenomeValido = true;
         }
 
         if (email == "") {
             email_vazio.style.display = 'flex';
         } else {
+            email_vazio.style.display = 'none';
             emailPreenchido = true;
         }
 
@@ -134,6 +134,7 @@
         if (confirmarEmail == "") {
             confirmar_email_vazio.style.display = 'flex';
         } else {
+            confirmar_email_vazio.style.display = 'none';
             confirmacaoEmail = true;
         }
 
@@ -141,6 +142,7 @@
         if (senha == "") {
             senha_vazio.style.display = 'flex';
         } else {
+            senha_vazio.style.display = 'none';
             var senhaPreenchida = true;
         }
 
@@ -148,6 +150,7 @@
         if (confirmarSenha == "") {
             confirmar_senha_vazio.style.display = 'flex';
         } else {
+            confirmar_senha_vazio.style.display = 'none';
             var confirmacaoSenha = true;
         }
 
@@ -155,6 +158,7 @@
             if (email.indexOf("@") <= 0 && email.indexOf(".com") <= 0) {
                 email_erro.style.display = 'flex';
             } else {
+                email_erro.style.display = 'none';
                 emailValido = true;
             }
         }
@@ -162,6 +166,7 @@
             if (confirmarEmail != email) {
                 confirmar_email_erro.style.display = 'flex';
             } else {
+                confirmar_email_erro.style.display = 'none';
                 emailIgual = true;
             }
         }
@@ -169,6 +174,7 @@
             if (senha < 6) {
                 senha_erro.style.display = 'flex';
             } else {
+                senha_erro.style.display = 'none';
                 var senhaValida = true;
             }
         }
@@ -176,78 +182,63 @@
             if (confirmarSenha != senha) {
                 confirmar_senha_erro.style.display = 'flex';
             } else {
+                confirmar_senha_erro.style.display = 'none';
                 var senhaIgual = true;
             }
         }
 
+        var cadastroEstaValido =
+            nomeValido +
+            sobrenomeValido +
+            emailPreenchido +
+            emailValido +
+            confirmacaoEmail +
+            emailIgual +
+            senhaPreenchida +
+            senhaValida +
+            confirmacaoSenha +
+            senhaIgual;
 
-        if (nome) {
-            finalizarAguardar();
-            return false;
-        } else {
-            setInterval(sumirMensagem, 5000);
-        }
+        if (cadastroEstaValido) {
+            loadin();
 
-        // Enviando o valor da nova input
-        fetch("/usuarios/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                // crie um atributo que recebe o valor recuperado aqui
-                // Agora vá para o arquivo routes/usuario.js
-                nomeServer: nomeVar,
-                emailServer: emailVar,
-                senhaServer: senhaVar,
-                empresaServer: empresaVar,
-                cpfServer: cpfVar
-            }),
-        })
-            .then(function (resposta) {
-                console.log("resposta: ", resposta);
-
-                if (resposta.ok) {
-                    cardErro.style.display = "block";
-
-                    mensagem_erro.innerHTML =
-                        "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-                    setTimeout(() => {
-                        window.location = "login.html";
-                    }, "2000");
-
-                    limparFormulario();
-                    finalizarAguardar();
-                } else {
-                    throw "Houve um erro ao tentar realizar o cadastro!";
-                }
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    nomeServer: nome,
+                    sobrenomeServer: sobrenome,
+                    emailServer: email,
+                    senhaServer: senha,
+                }),
             })
-            .catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`);
-                finalizarAguardar();
-            });
+                .then(function (resposta) {
+                    console.log("resposta: ", resposta);
 
-        return false;
-    }
+                    if (resposta.ok) {
+                        cardErro.style.display = "block";
 
-    function listar() {
-        fetch("/empresas/listar", {
-            method: "GET",
-        })
-            .then(function (resposta) {
-                resposta.json().then((empresas) => {
-                    empresas.forEach((empresa) => {
-                        listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
-                    });
+                        mensagem_erro.innerHTML =
+                            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                        setTimeout(() => {
+                            window.location = "login.html";
+                        }, "2000");
+
+                        limparFormulario();
+                        finalizarAguardar();
+                    } else {
+                        throw "Houve um erro ao tentar realizar o cadastro!";
+                    }
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                    pararLoading();
                 });
-            })
-            .catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`);
-            });
-    }
 
-    function sumirMensagem() {
-        cardErro.style.display = "none";
+            return false;
+        }
     }
 </script>
