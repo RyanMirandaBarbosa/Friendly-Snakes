@@ -27,15 +27,23 @@
 
                 <div class="container-inputs">
                     Email
-                    <input type="text">
+                    <input id="input_email" type="text">
+                    <span id="email_vazio" class="erro">*Campo vazio*</span>
+                    <span id="email_erro" class="erro">*Email invalido*</span>
                 </div>
                 <div class="container-inputs">
                     Senha
-                    <input type="password">
+                    <input id="input_senha" type="password">
+                    <span id="senha_vazio" class="erro">*Campo vazio*</span>
+                    <span id="senha_erro" class="erro">*Senha invalido*</span>
                 </div>
                 <div class="container-inputs">
-                    <button class="button-login">Logar</button>
+                    <button onclick="entrar()" class="button-login">Logar</button>
                     <a href="./Cadastro.html">Clique aqui para cadastrar-se</a>
+                </div>
+
+                <div id="loading" class="loading">
+                    <img src="./Assets/Icons/loading.gif" alt="">
                 </div>
 
             </div>
@@ -51,15 +59,13 @@
 </html>
 
 <script>
-
-
     function entrar() {
         aguardar();
 
-        var emailVar = email_input.value;
-        var senhaVar = senha_input.value;
+        var email = input_email.value;
+        var senha = input_senha.value;
 
-        if (emailVar == "" || senhaVar == "") {
+        if (email == "" || senha == "") {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
             finalizarAguardar();
@@ -69,8 +75,8 @@
             setInterval(sumirMensagem, 5000)
         }
 
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
+        console.log("FORM LOGIN: ", email);
+        console.log("FORM SENHA: ", senha);
 
         fetch("/usuarios/autenticar", {
             method: "POST",
