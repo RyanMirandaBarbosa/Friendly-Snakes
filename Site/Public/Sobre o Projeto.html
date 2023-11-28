@@ -40,7 +40,7 @@
                     <i class="bi bi-list"></i>
                 </button>
                 
-        <div class="nome">Ryan Miranda Barbosa</div>
+        <div id="nome_usuario_menu" class="nome">Ryan Miranda Barbosa</div>
     
             <div class="tela">
                 <div class="nav-bar">
@@ -125,6 +125,11 @@
 </body>
 
 <script>
+    var nome = sessionStorage.NOME_USUARIO;
+    var sobrenome = sessionStorage.SOBRENOME_USUARIO;
+
+    nome_usuario_menu.innerHTML = `${nome} ${sobrenome}`;
+
     const ctx1 = document.getElementById('myChart1');
     const ctx2 = document.getElementById('myChart2');
     const ctx3 = document.getElementById('myChart3');
