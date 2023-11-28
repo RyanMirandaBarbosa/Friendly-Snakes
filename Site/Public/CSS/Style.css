@@ -62,7 +62,7 @@ header {
       }
     }
 
-#menu button {
+#menu .button-menu {
     background-color: #00000000;
     height: auto;
     outline: none;
@@ -673,7 +673,7 @@ input:hover {
 }
 
 /* header */
-.container-header-itens button {
+.container-header-itens .button-menu button {
     background-color: #00000000;
     width: auto;
     height: auto;
@@ -701,6 +701,35 @@ input:hover {
     justify-content: space-between;
     font-size: 20px;
 }
+
+.button-sair {
+    font-size: 20px;
+    width: 100px;
+}
+
+.nav-bar ul li button {
+    background-color: #00000000;
+    outline: none;
+    border: none;
+    border-width: none;
+    cursor: pointer;
+    animation: none;
+}
+
+.nav-bar button:hover {
+    transition: 0s;
+    box-shadow: none;
+}
+
+.nav-bar button:active {
+    transition: 0s;
+    box-shadow: none;
+    transform: translateY(4px);
+}
+
+
+
+/* loading */
 
 .loading {
     display: none;

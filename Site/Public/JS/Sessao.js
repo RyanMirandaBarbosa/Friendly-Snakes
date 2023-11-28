@@ -12,9 +12,9 @@ function validarSessao() {
     }
 }
 
-function limparSessao() {
+function logout() {
     sessionStorage.clear();
-    window.location = "../login.html";
+    window.location = "../Login.html";
 }
 
 // carregamento (loading)

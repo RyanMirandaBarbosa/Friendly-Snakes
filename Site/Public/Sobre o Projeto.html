@@ -13,6 +13,7 @@
 
     <!-- script -->
     <script src="./JS/Modal.js"></script>
+    <script src="./JS/sessao.js"></script>
 
     <!-- chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -29,18 +30,20 @@
 
         <div class="container-header-itens">
             <img src="./Assets/Logo/Friendly Snakes logo White.png" alt="">
-
-            <button onclick="exibir_menu()">
-                <i class="bi bi-list"></i>
-            </button>
+            
+            <div class="button-menu">
+                <button onclick="exibir_menu()">
+                    <i class="bi bi-list"></i>
+                </button>
+            </div>
 
             <div id="menu">
 
-                <button onclick="fechar_menu()">
+                <button class="button-menu" onclick="fechar_menu()">
                     <i class="bi bi-list"></i>
                 </button>
                 
-        <div id="nome_usuario_menu" class="nome">Ryan Miranda Barbosa</div>
+        <div id="nome_usuario_menu" class="nome"></div>
     
             <div class="tela">
                 <div class="nav-bar">
@@ -50,7 +53,7 @@
                         <li><a href="Conhecimento.html">Mitos & Conhecimento</a></li>
                         <li><a href="Catálogo de Espécies.html">Especies Brasileiras</a></li>
                         <li><a href="Fórum.html">Forum</a></li>
-                        <li><a href="">Sair</a></li>
+                        <li><button class="button-sair" onclick="logout()">Sair</button></li>
                     </ul>
                 </div>
             </div>
