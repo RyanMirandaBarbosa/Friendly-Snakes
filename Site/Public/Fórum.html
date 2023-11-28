@@ -1,55 +1,60 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-        <!-- fivcon - icon da aba do navegador -->
-        <link rel="shortcut icon" href="./Assets/Logo/Friendly Snakes logo simples White.png" type="image/x-icon">
-    
-        <!-- CSS -->
-        <link rel="stylesheet" href="./CSS/Style.css">
-    
-        <!-- script -->
-        <script src="JS/JS.js"></script>
-    
-        <!-- bootstrap icons -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-    
-        <title>Fórum | Friendly Snakes</title>
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- fivcon - icon da aba do navegador -->
+    <link rel="shortcut icon" href="./Assets/Logo/Friendly Snakes logo simples White.png" type="image/x-icon">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./CSS/Style.css">
+
+    <!-- script -->
+    <script src="./JS/Modal.js"></script>
+    <script src="./JS/sessao.js"></script>
+
+    <!-- bootstrap icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+
+    <title>Fórum | Friendly Snakes</title>
+</head>
+
 <body>
     <header>
 
         <div class="container-header-itens">
             <img src="./Assets/Logo/Friendly Snakes logo White.png" alt="">
 
-            <button onclick="exibir_menu()">
-                <i class="bi bi-list"></i>
-            </button>
+            <div class="button-menu">
+                <button onclick="exibir_menu()">
+                    <i class="bi bi-list"></i>
+                </button>
+            </div>
 
             <div id="menu">
 
-                <button onclick="fechar_menu()">
+                <button class="button-menu" onclick="fechar_menu()">
                     <i class="bi bi-list"></i>
                 </button>
-                
-        <div class="nome">Ryan Miranda Barbosa</div>
-    
-            <div class="tela">
-                <div class="nav-bar">
-                    <ul>
-                        <li><a href="Perfil.html">Perfil</a></li>
-                        <li><a href="Sobre o Projeto.html">Sobre o Projeto</a></li>
-                        <li><a href="Conhecimento.html">Mitos & Conhecimento</a></li>
-                        <li><a href="Catálogo de Espécies.html">Especies Brasileiras</a></li>
-                        <li><a href="Fórum.html">Forum</a></li>
-                        <li><a href="">Sair</a></li>
-                    </ul>
+
+                <div id="nome_usuario_menu" class="nome"></div>
+
+                <div class="tela">
+                    <div class="nav-bar">
+                        <ul>
+                            <li><a href="Perfil.html">Perfil</a></li>
+                            <li><a href="Sobre o Projeto.html">Sobre o Projeto</a></li>
+                            <li><a href="Conhecimento.html">Mitos & Conhecimento</a></li>
+                            <li><a href="Catálogo de Espécies.html">Especies Brasileiras</a></li>
+                            <li><a href="Fórum.html">Forum</a></li>
+                            <li><button class="button-sair" onclick="logout()">Sair</button></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
     </header>
     <div class="tela">
@@ -69,7 +74,7 @@
             <div class="nome">Criar Publicação</div>
 
             <div class="line"></div>
-                <textarea class="text-public" name="" id="" cols="30" rows="10"></textarea>
+            <textarea class="text-public" name="" id="" cols="30" rows="10"></textarea>
             <div>
                 <button>Publicar</button>
             </div>
@@ -84,23 +89,25 @@
                         <i class="bi bi-x-lg"></i>
                     </button>
                 </div>
-    
+
                 <div class="nome">Responder</div>
-    
+
                 <div class="line"></div>
-                    <textarea class="text-public" name="" id="" cols="30" rows="10"></textarea>
+                <textarea class="text-public" name="" id="" cols="30" rows="10"></textarea>
                 <div>
                     <button>Responder</button>
                 </div>
             </div>
 
             <div id="public">
-    
+
                 <div class="nome">Ryan Miranda Barbosa</div>
-    
+
                 <div class="line"></div>
                 <div class="texto-publicacao">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt expedita nobis inventore adipisci autem minima unde a neque quasi qui nemo quaerat facere, dolore sapiente distinctio sint deserunt ipsa ipsum!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt expedita nobis inventore adipisci
+                    autem minima unde a neque quasi qui nemo quaerat facere, dolore sapiente distinctio sint deserunt
+                    ipsa ipsum!
                 </div>
                 <div class="line"></div>
                 <div>
@@ -117,4 +124,13 @@
     </div>
 
 </body>
+
 </html>
+
+<script>
+    // exibir nome e sobrenome do user na modal
+    var nome = sessionStorage.NOME_USUARIO;
+    var sobrenome = sessionStorage.SOBRENOME_USUARIO;
+
+    nome_usuario_menu.innerHTML = `${nome} ${sobrenome}`;
+</script>

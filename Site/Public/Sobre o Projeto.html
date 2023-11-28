@@ -30,7 +30,7 @@
 
         <div class="container-header-itens">
             <img src="./Assets/Logo/Friendly Snakes logo White.png" alt="">
-            
+
             <div class="button-menu">
                 <button onclick="exibir_menu()">
                     <i class="bi bi-list"></i>
@@ -42,23 +42,23 @@
                 <button class="button-menu" onclick="fechar_menu()">
                     <i class="bi bi-list"></i>
                 </button>
-                
-        <div id="nome_usuario_menu" class="nome"></div>
-    
-            <div class="tela">
-                <div class="nav-bar">
-                    <ul>
-                        <li><a href="Perfil.html">Perfil</a></li>
-                        <li><a href="Sobre o Projeto.html">Sobre o Projeto</a></li>
-                        <li><a href="Conhecimento.html">Mitos & Conhecimento</a></li>
-                        <li><a href="Catálogo de Espécies.html">Especies Brasileiras</a></li>
-                        <li><a href="Fórum.html">Forum</a></li>
-                        <li><button class="button-sair" onclick="logout()">Sair</button></li>
-                    </ul>
+
+                <div id="nome_usuario_menu" class="nome"></div>
+
+                <div class="tela">
+                    <div class="nav-bar">
+                        <ul>
+                            <li><a href="Perfil.html">Perfil</a></li>
+                            <li><a href="Sobre o Projeto.html">Sobre o Projeto</a></li>
+                            <li><a href="Conhecimento.html">Mitos & Conhecimento</a></li>
+                            <li><a href="Catálogo de Espécies.html">Especies Brasileiras</a></li>
+                            <li><a href="Fórum.html">Forum</a></li>
+                            <li><button class="button-sair" onclick="logout()">Sair</button></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
     </header>
 
@@ -128,6 +128,7 @@
 </body>
 
 <script>
+    // exibir nome e sobrenome do user na modal
     var nome = sessionStorage.NOME_USUARIO;
     var sobrenome = sessionStorage.SOBRENOME_USUARIO;
 
@@ -189,33 +190,33 @@
     });
 
     new Chart(ctx3, {
-    type: 'bar',
-    data: {
-      labels: ['Muito Tranquilo', 'Tranquilo', 'Neutro', 'Medo', 'Muito Medo'],
-      datasets: [{
-        label: 'Antes',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: ['#de4545'],
-        borderColor: ['#ffffff'],
-        borderWidth: 3
-      },
-      {
-        label: 'Depois',
-        data: [5, 5, 5, 7, 8, 9],
-        backgroundColor: ['#457fde'],
-        borderColor: ['#ffffff'],
-        borderWidth: 3
-      }
-    ]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+        type: 'bar',
+        data: {
+            labels: ['Muito Tranquilo', 'Tranquilo', 'Neutro', 'Medo', 'Muito Medo'],
+            datasets: [{
+                label: 'Antes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: ['#de4545'],
+                borderColor: ['#ffffff'],
+                borderWidth: 3
+            },
+            {
+                label: 'Depois',
+                data: [5, 5, 5, 7, 8, 9],
+                backgroundColor: ['#457fde'],
+                borderColor: ['#ffffff'],
+                borderWidth: 3
+            }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
         }
-      }
-    }
-  });
+    });
 </script>
 
 </html>
