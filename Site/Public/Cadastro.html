@@ -57,7 +57,7 @@
                     Senha
                     <input type="text" id="input_senha">
                     <span id="senha_vazio" class="erro">*Campo vazio*</span>
-                    <span id="senha_erro" class="erro">*Senha invalido*</span>
+                    <span id="senha_erro" class="erro">*Senha deve estar entre 6 e 8 caracteres*</span>
                 </div>
 
                 <div class="container-inputs">
@@ -90,7 +90,7 @@
 
 <script>
     function cadastrar() {
-  
+
         var nome = input_nome.value;
         var sobrenome = input_sobrenome.value;
         var email = input_email.value;
@@ -155,7 +155,7 @@
         }
 
         if (emailPreenchido) {
-            if (email.indexOf("@") <= 0 && email.indexOf(".com") <= 0) {
+            if (email.indexOf("@") <= 0) {
                 email_erro.style.display = 'flex';
             } else {
                 email_erro.style.display = 'none';
@@ -171,7 +171,7 @@
             }
         }
         if (senhaPreenchida) {
-            if (senha < 6) {
+            if (senha.length < 6 || senha.length > 8) {
                 senha_erro.style.display = 'flex';
             } else {
                 senha_erro.style.display = 'none';
@@ -188,20 +188,19 @@
         }
 
         var cadastroEstaValido =
-            nomeValido +
-            sobrenomeValido +
-            emailPreenchido +
-            emailValido +
-            confirmacaoEmail +
-            emailIgual +
-            senhaPreenchida +
-            senhaValida +
-            confirmacaoSenha +
+            nomeValido &&
+            sobrenomeValido &&
+            emailPreenchido &&
+            emailValido &&
+            confirmacaoEmail &&
+            emailIgual &&
+            senhaPreenchida &&
+            senhaValida &&
+            confirmacaoSenha &&
             senhaIgual;
 
         if (cadastroEstaValido) {
-            loadin();
-
+            aguardar()
             fetch("/usuarios/cadastrar", {
                 method: "POST",
                 headers: {
@@ -214,28 +213,24 @@
                     senhaServer: senha,
                 }),
             })
-                .then(function (resposta) {
-                    console.log("resposta: ", resposta);
-
+                .then(resposta => {
                     if (resposta.ok) {
-                        cardErro.style.display = "block";
-
-                        mensagem_erro.innerHTML =
-                            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-                        setTimeout(() => {
-                            window.location = "login.html";
-                        }, "2000");
-
-                        limparFormulario();
-                        finalizarAguardar();
-                    } else {
-                        throw "Houve um erro ao tentar realizar o cadastro!";
+                        return resposta.json();
                     }
+                    throw new Error("Houve um erro ao tentar realizar o cadastro!");
                 })
-                .catch(function (resposta) {
-                    console.log(`#ERRO: ${resposta}`);
-                    pararLoading();
+                .then(dados => {
+                    // Processar os dados retornados em caso de sucesso (se necessário)
+                    console.log("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+
+                    setTimeout(() => {
+                        window.location = "Login.html";
+                        finalizarAguardar();
+                    }, 2000);
+                })
+                .catch(erro => {
+                    // Tratar os erros
+                    console.error(`#ERRO: ${erro.message}`);
                 });
 
             return false;
