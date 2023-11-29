@@ -19,6 +19,8 @@ resposta varchar(45),
 constraint chkResposta1 check (resposta in ('Muito Tranquilo', 'Tranquilo', 'Neutro', 'Medo', 'Muito Medo'))
 );
 
+-- select resposta, count(*) as 'total' from Pesquisa1 group by resposta; -- where pesquisa = 'Neutro';
+
 create table Pesquisa2 (
 idPesquisa int primary key auto_increment,
 resposta varchar(45),

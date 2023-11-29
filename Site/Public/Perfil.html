@@ -59,10 +59,10 @@
     </header>
     <div class="tela">
         <div class="card-padrao">
-            <div class="nome">Ryan Miranda Barbosa</div>
+            <div id="nome_perfil_user" class="nome"></div>
             <div class="line"></div>
 
-            <div class="titulo">Espécies favorita</div>
+            <div class="titulo">Cobra favorita</div>
             <div></div>
             <div class="line"></div>
 
@@ -74,84 +74,85 @@
             <div class="texto">
                 Após conhecer o projeto Friendly Snakes, como você se sente agora em relação as cobras?
             </div>
-            <div><button onclick="exibir_pesquisa2()">Responder</button></div>
+            <div></div><button onclick="exibir_pesquisa2()">Responder</button>
+        </div>
+    </div>
+
+    <div id="pesquisa1">
+        <div class="close">
+            <button onclick="fechar_pesquisa1()">
+                <i class="bi bi-x-lg"></i>
+            </button>
         </div>
 
-        <div id="pesquisa1">
-            <div class="close">
-                <button onclick="fechar_pesquisa1()">
-                    <i class="bi bi-x-lg"></i>
-                </button>
+        <div class="nome">Pesquisa 1</div>
+        <div class="line"></div>
+        <span id="checkbox_erro_p1" class="erro">*Preencha apenas um campo*</span>
+        <div class="pesquisa">
+
+            <div class="pesquisa-align">
+                <span>Muito Tranquilo</span>
+                <input id="input_muito_tranquilo_p1" type="checkbox">
+            </div>
+            <div class="pesquisa-align">
+                <span>Tranquilo</span>
+                <input id="input_tranquilo_p1" type="checkbox">
+            </div>
+            <div class="pesquisa-align">
+                <span>Neutro</span>
+                <input id="input_neutro_p1" type="checkbox">
+            </div>
+            <div class="pesquisa-align">
+                <span>Medo</span>
+                <input id="input_medo_p1" type="checkbox">
+            </div>
+            <div class="pesquisa-align">
+                <span>Muito Medo</span>
+                <input id="input_muito_medo_p1" type="checkbox">
             </div>
 
-            <div class="nome">Pesquisa 1</div>
-            <div class="line"></div>
-
-            <div class="pesquisa">
-
-                <div class="pesquisa-align">
-                    <span>Muito Tranquilo</span>
-                    <input type="checkbox">
-                </div>
-                <div class="pesquisa-align">
-                    <span>Tranquilo</span>
-                    <input type="checkbox">
-                </div>
-                <div class="pesquisa-align">
-                    <span>Neutro</span>
-                    <input type="checkbox">
-                </div>
-                <div class="pesquisa-align">
-                    <span>Medo</span>
-                    <input type="checkbox">
-                </div>
-                <div class="pesquisa-align">
-                    <span>Muito Medo</span>
-                    <input type="checkbox">
-                </div>
-
-            </div>
-
-            <div><button>Responder</button></div>
         </div>
 
-        <div id="pesquisa2">
-            <div class="close">
-                <button onclick="fechar_pesquisa2()">
-                    <i class="bi bi-x-lg"></i>
-                </button>
-            </div>
+        <div><button onclick="validar_p1()">Responder</button></div>
+    </div>
 
-            <div class="nome">Pesquisa 2</div>
-            <div class="line"></div>
-
-            <div class="pesquisa">
-
-                <div class="pesquisa-align">
-                    <span>Muito Tranquilo</span>
-                    <input type="checkbox">
-                </div>
-                <div class="pesquisa-align">
-                    <span>Tranquilo</span>
-                    <input type="checkbox">
-                </div>
-                <div class="pesquisa-align">
-                    <span>Neutro</span>
-                    <input type="checkbox">
-                </div>
-                <div class="pesquisa-align">
-                    <span>Medo</span>
-                    <input type="checkbox">
-                </div>
-                <div class="pesquisa-align">
-                    <span>Muito Medo</span>
-                    <input type="checkbox">
-                </div>
-
-            </div>
-
-            <div><button>Responder</button></div>
+    <div id="pesquisa2">
+        <div class="close">
+            <button onclick="fechar_pesquisa2()">
+                <i class="bi bi-x-lg"></i>
+            </button>
         </div>
+
+        <div class="nome">Pesquisa 2</div>
+        <div class="line"></div>
+        <span id="checkbox_erro_p2" class="erro">*Preencha apenas um campo*</span>
+        <div class="pesquisa">
+
+            <div class="pesquisa-align">
+                <span>Muito Tranquilo</span>
+                <input id="input_muito_tranquilo_p2" type="checkbox">
+            </div>
+            <div class="pesquisa-align">
+                <span>Tranquilo</span>
+                <input id="input_tranquilo_p2" type="checkbox">
+            </div>
+            <div class="pesquisa-align">
+                <span>Neutro</span>
+                <input id="input_neutro_p2" type="checkbox">
+            </div>
+            <div class="pesquisa-align">
+                <span>Medo</span>
+                <input id="input_medo_p2" type="checkbox">
+            </div>
+            <div class="pesquisa-align">
+                <span>Muito Medo</span>
+                <input id="input_muito_medo_p2" type="checkbox">
+            </div>
+
+        </div>
+
+        <div><button onclick="validar_p2()">Responder</button></div>
+    </div>
 
     </div>
 </body>
@@ -164,4 +165,165 @@
     var sobrenome = sessionStorage.SOBRENOME_USUARIO;
 
     nome_usuario_menu.innerHTML = `${nome} ${sobrenome}`;
+    nome_perfil_user.innerHTML = `${nome} ${sobrenome}`;
+
+
+    function validar_p1() {
+
+        var muitoTranquilo = input_muito_tranquilo_p1.checked;
+        var tranquilo = input_tranquilo_p1.checked;
+        var neutro = input_neutro_p1.checked;
+        var medo = input_medo_p1.checked;
+        var muitoMedo = input_muito_medo_p1.checked;
+
+        var qtdChecked = 0;
+        var resposta_p1 = "";
+
+        if (muitoTranquilo == true) {
+            qtdChecked++;
+            resposta_p1 = "Muito Tranquilo";
+        }
+        if (tranquilo == true) {
+            qtdChecked++;
+            resposta_p1 = "Tranquilo";
+        }
+        if (neutro == true) {
+            qtdChecked++;
+            resposta_p1 = "Neutro";
+        }
+        if (medo == true) {
+            qtdChecked++;
+            resposta_p1 = "Medo";
+        }
+        if (muitoMedo == true) {
+            qtdChecked++;
+            resposta_p1 = "Muito Medo";
+        }
+
+        if (qtdChecked != 1) {
+            checkbox_erro_p1.style.display = 'flex';
+        } else {
+            checkbox_erro_p1.style.display = 'none';
+
+            fetch("/usuarios/responder", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    resposta_p1Server: resposta_p1
+                }),
+            })
+                .then(resposta => {
+                    if (resposta.ok) {
+                        return resposta.json();
+                    }
+                    throw new Error("Houve um erro ao tentar realizar o cadastro!");
+                })
+                .then(dados => {
+                    // Processar os dados retornados em caso de sucesso (se necessário)
+                    console.log("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+
+                    fechar_pesquisa1();
+                })
+                .catch(erro => {
+                    // Tratar os erros
+                    console.error(`#ERRO: ${erro.message}`);
+                });
+
+            return false;
+        }
+    }
+    //         fetch("/usuarios/responder", {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify({
+    //                 resposta_p1Server: resposta_p1,
+    //             }),
+    //         })
+    //             .then(resposta => {
+    //                 if (resposta.ok) {
+    //                     return resposta.json();
+    //                 }
+    //                 throw new Error("Houve um erro ao tentar realizar a pesquisa!");
+    //             })
+    //             .then(dados => {
+    //                 // Processar os dados retornados em caso de sucesso (se necessário)
+    //                 console.log("Pesquisa realizada com sucesso!");
+    //                 fechar_pesquisa1(); // ou fechar_pesquisa2() dependendo da pesquisa
+    //             })
+    //             .catch(erro => {
+    //                 // Tratar os erros
+    //                 console.error(`#ERRO: ${erro.message}`);
+    //                 console.error("#ERRO:", erro);
+    //             });
+    //     }
+    // }
+
+    function validar_p2() {
+
+        var muitoTranquilo = input_muito_tranquilo_p2.checked;
+        var tranquilo = input_tranquilo_p2.checked;
+        var neutro = input_neutro_p2.checked;
+        var medo = input_medo_p2.checked;
+        var muitoMedo = input_muito_medo_p2.checked;
+
+        var qtdChecked = 0;
+        var resposta_p2 = "";
+
+        if (muitoTranquilo == true) {
+            qtdChecked++;
+            resposta_p2 = "Muito Tranquilo";
+        }
+        if (tranquilo == true) {
+            qtdChecked++;
+            resposta_p2 = "Tranquilo";
+        }
+        if (neutro == true) {
+            qtdChecked++;
+            resposta_p2 = "Neutro";
+        }
+        if (medo == true) {
+            qtdChecked++;
+            resposta_p2 = "Medo";
+        }
+        if (muitoMedo == true) {
+            qtdChecked++;
+            resposta_p2 = "Muito Medo";
+        }
+
+        if (qtdChecked != 2) {
+            checkbox_erro_p2.style.display = 'flex';
+        } else {
+            checkbox_erro_p2.style.display = 'none';
+
+            fetch("/usuarios/responder", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    resposta_p2Server: resposta_p2,
+                }),
+            })
+                .then(resposta => {
+                    if (resposta.ok) {
+                        return resposta.json();
+                    }
+                    throw new Error("Houve um erro ao tentar realizar a pesquisa!");
+                })
+                .then(dados => {
+                    // Processar os dados retornados em caso de sucesso (se necessário)
+                    console.log("Pesquisa realizada com sucesso!");
+                    fechar_pesquisa2(); // ou fechar_pesquisa2() dependendo da pesquisa
+                })
+                .catch(erro => {
+                    // Tratar os erros
+                    console.error(`#ERRO: ${erro.message}`);
+                });
+        }
+    }
+
 </script>

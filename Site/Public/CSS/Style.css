@@ -632,7 +632,7 @@ input:hover {
 }
 
 /* button */
-.tela button {
+button {
     height: 40px;
     font-size: 20px;
     background-color: #878787;
@@ -643,12 +643,12 @@ input:hover {
     cursor: pointer;
 }
 
-.tela button:hover {
+button:hover {
     transition: 1s;
     box-shadow: 0px 0px 10px 10px rgba(39, 39, 39, 0.25);
 }
 
-.tela button:active {
+button:active {
     transition: 0s;
     box-shadow: 0px 0px 10px 5px rgba(39, 39, 39, 0.25);
     transform: translateY(4px);

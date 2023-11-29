@@ -1,5 +1,3 @@
-
-
 // abrir e fechar menu
 function exibir_menu() {
     menu.style.display = 'flex';
