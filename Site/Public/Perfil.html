@@ -70,11 +70,17 @@
             <div class="texto">
                 Antes de conhecer o projeto Friendly Snakes, como você se sentia em relação as cobras?
             </div>
-            <div><button onclick="exibir_pesquisa1()">Responder</button></div>
+            <div>
+                <button id="button_exibir_p1" onclick="exibir_pesquisa1()">Responder</button>
+                <SPan id="span_p1_respondida">Respondido</SPan>
+            </div>
             <div class="texto">
                 Após conhecer o projeto Friendly Snakes, como você se sente agora em relação as cobras?
             </div>
-            <div></div><button onclick="exibir_pesquisa2()">Responder</button>
+            <div>
+                <button id="button_exibir_p2" onclick="exibir_pesquisa2()">Responder</button>
+                <SPan id="span_p2_respondida">Respondido</SPan>
+            </div>
         </div>
     </div>
 
@@ -170,7 +176,6 @@
 
 
     function validar_p1() {
-        var idUsuario = sessionStorage.ID_USUARIO;
 
         var muitoTranquilo = input_muito_tranquilo_p1.checked;
         var tranquilo = input_tranquilo_p1.checked;
@@ -214,13 +219,13 @@
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    resposta_p1Server: resposta_p1
-                    // resposta_p1_perfilServer: resposta_p1_perfil,
-                    // idPesquisaServer: idPesquisa
+                    resposta_p1Server: resposta_p1,
+                    idUsuarioServer: idUsuario
                 }),
             })
                 .then(resposta => {
                     if (resposta.ok) {
+                        fechar_pesquisa1();
                         return resposta.json();
                     }
                     throw new Error("Houve um erro ao tentar realizar o cadastro!");
@@ -253,26 +258,26 @@
             //         console.error(`#ERRO: ${erro.message}`);
             //     });
 
-            fetch("/usuarios/updateUsuario", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    idUsuarioServer: idUsuario,
-                    idPesquisaServer: idPesquisa
-                }),
-            })
-                .then(resposta => {
-                    if (resposta.ok) {
-                        fechar_pesquisa1();
-                    }
-                    throw new Error("Houve um erro ao tentar realizar o cadastro!");
-                })
-                .catch(erro => {
-                    // Tratar os erros
-                    console.error(`#ERRO: ${erro.message}`);
-                });
+            // fetch("/usuarios/updateUsuario", {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify({
+            //         idUsuarioServer: idUsuario,
+            //         idPesquisaServer: idPesquisa
+            //     }),
+            // })
+            //     .then(resposta => {
+            //         if (resposta.ok) {
+            //             fechar_pesquisa1();
+            //         }
+            //         throw new Error("Houve um erro ao tentar realizar o cadastro!");
+            //     })
+            //     .catch(erro => {
+            //         // Tratar os erros
+            //         console.error(`#ERRO: ${erro.message}`);
+            //     });
 
             return false;
         }

@@ -746,3 +746,26 @@ button:active {
     color: #df3e3e;
     font-weight: bold;
 }
+
+
+
+/* pesquisa button respondido ou n */
+#button_exibir_p1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#span_p1_respondida {
+    display: none;
+}
+
+#button_exibir_p2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#span_p2_respondida {
+    display: none;
+}

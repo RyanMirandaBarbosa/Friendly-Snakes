@@ -25,13 +25,13 @@ function cadastrar(nome, sobrenome, email, senha) {
     return database.executar(instrucao);
 }
 
-function responder(resposta_p1, idPesquisa, idUsuario) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function responder():", resposta_p1, idPesquisa, idUsuario);
-    console.log(idUsuario)
+function responder(resposta_p1, idUsuario) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function responder():", resposta_p1, idUsuario);
+    // console.log(idUsuario)
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-        INSERT INTO Pesquisa1 (resposta) VALUES ('${resposta_p1}');
+        INSERT INTO Pesquisa1 (resposta, fkUsuario) VALUES ('${resposta_p1}', ${idUsuario});
         `;
         console.log("Executando a instrução SQL: \n" + instrucao);
         return database.executar(instrucao);
@@ -41,34 +41,34 @@ function responder(resposta_p1, idPesquisa, idUsuario) {
     // select idPesquisa from Pesquisa1 order by idPesquisa desc limit 1;
     // UPDATE Usuario SET fkPesquisa1 = ${idPesquisa} WHERE idUsuario = ${idUsuario};
     
-function responderIdPesquisa() {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ",)
-    var instrucao = `
-        select idPesquisa from Pesquisa1 order by idPesquisa desc limit 1;
-    `;
+// function responderIdPesquisa() {
+//     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ",)
+//     var instrucao = `
+//         select idPesquisa from Pesquisa1 order by idPesquisa desc limit 1;
+//     `;
 
-    // SELECT idUsuario, nome, email as usuarioId FROM usuario WHERE email = '${email}' AND senha = '${senha}';
+//     // SELECT idUsuario, nome, email as usuarioId FROM usuario WHERE email = '${email}' AND senha = '${senha}';
 
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
-}
+//     console.log("Executando a instrução SQL: \n" + instrucao);
+//     return database.executar(instrucao);
+// }
 
-function updateUsuario(idUsuario, idPesquisa) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ",)
-    var instrucao = `
-    UPDATE Usuario SET fkPesquisa1 = ${idPesquisa} WHERE idUsuario = ${idUsuario};
-    `;
+// function updateUsuario(idUsuario, idPesquisa) {
+//     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ",)
+//     var instrucao = `
+//     UPDATE Usuario SET fkPesquisa1 = ${idPesquisa} WHERE idUsuario = ${idUsuario};
+//     `;
 
-    // SELECT idUsuario, nome, email as usuarioId FROM usuario WHERE email = '${email}' AND senha = '${senha}';
+//     // SELECT idUsuario, nome, email as usuarioId FROM usuario WHERE email = '${email}' AND senha = '${senha}';
 
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
-}
+//     console.log("Executando a instrução SQL: \n" + instrucao);
+//     return database.executar(instrucao);
+// }
 
 module.exports = {
     autenticar,
     cadastrar,
-    responder,
-    responderIdPesquisa,
-    updateUsuario
+    responder
+    // responderIdPesquisa
+    // updateUsuario
 };

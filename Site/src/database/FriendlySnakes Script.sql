@@ -7,53 +7,52 @@ idUsuario int primary key auto_increment,
 nome varchar(45),
 sobreNome varchar(45),
 email varchar(45),
-senha varchar(8),
-fkPesquisa1 int,
-fkPesquisa2 int,
-fkEspecieFavorita int
+senha varchar(8)
 );
 
 create table Pesquisa1 (
 idPesquisa int primary key auto_increment,
 resposta varchar(45),
-constraint chkResposta1 check (resposta in ('Muito Tranquilo', 'Tranquilo', 'Neutro', 'Medo', 'Muito Medo'))
+constraint chkResposta1 check (resposta in ('Muito Tranquilo', 'Tranquilo', 'Neutro', 'Medo', 'Muito Medo')),
+fkUsuario int,
+constraint fkUsuarioPesquisa1 foreign key (fkUsuario) references Usuario (idUsuario)
 );
-
--- select resposta, count(*) as 'total' from Pesquisa1 group by resposta; -- where pesquisa = 'Neutro';
 
 create table Pesquisa2 (
 idPesquisa int primary key auto_increment,
 resposta varchar(45),
-constraint chkResposta2 check (resposta in ('Muito Tranquilo', 'Tranquilo', 'Neutro', 'Medo', 'Muito Medo'))
+constraint chkResposta2 check (resposta in ('Muito Tranquilo', 'Tranquilo', 'Neutro', 'Medo', 'Muito Medo')),
+fkUsuario int,
+constraint fkUsuarioPesquisa2 foreign key (fkUsuario) references Usuario (idUsuario)
 );
-
-alter table Usuario add constraint fkPesquisa1 foreign key (fkPesquisa1) references Pesquisa1 (idPesquisa);
-alter table Usuario add constraint fkPesquisa2 foreign key (fkPesquisa2) references Pesquisa2 (idPesquisa);
 
 create table Especies (
 idEspecies int primary key auto_increment,
+-- salvar imagem da coitada salva com url da imagem varchar()
 nome varchar(45),
 nomeCientifico varchar(45),
 familia varchar(45),
-descricao varchar(250)
+descricao varchar(999),
+fkUsuario int,
+constraint fkUsuarioEspecieFav foreign key (fkUsuario) references Usuario(idUsuario)
 );
 
-alter table Usuario add constraint fkEspeciesFavoritas foreign key (fkEspecieFavorita) references Especies (idEspecies);
-
 create table Publicacao (
-idPublicacao int primary key auto_increment,
+idPublicacao int auto_increment,
 fkUsuario int,
 constraint fkUsuarioPublicacao foreign key (fkUsuario) references Usuario (idUsuario),
-conteudo varchar(250)
+conteudo varchar(999),
+primary key (idPublicacao, fkUsuario)
 );
 
 create table Comentario (
-idComentario int primary key auto_increment,
+idComentario int auto_increment,
 fkUsuario int,
 constraint fkUsuarioComentario foreign key (fkUsuario) references Usuario (idUsuario),
 fkPublicacao int,
 constraint fkPublicacaoComentario foreign key (fkPublicacao) references Usuario (idUsuario),
-comentario varchar(250)
+comentario varchar(250),
+primary key (idComentario, fkUsuario, fkPublicacao)
 );
 
 describe Usuario;
@@ -69,3 +68,5 @@ select * from Pesquisa1;
 select * from Pesquisa2;
 select * from Publicacao;
 select * from Comentario;
+
+-- select resposta, count(*) as 'total' from Pesquisa1 group by resposta; -- where pesquisa = 'Neutro';

@@ -15,11 +15,11 @@ router.post("/responder", function (req, res) {
     usuarioController.responder(req, res);
 }); 
 
-router.post("/responderIdPesquisa", function (req, res) {
-    usuarioController.responderIdPesquisa(req, res);
-}); 
+// router.post("/responderIdPesquisa", function (req, res) {
+//     usuarioController.responderIdPesquisa(req, res);
+// }); 
 
-router.post("/updateUsuario", function (req, res) {
-    usuarioController.updateUsuario(req, res);
-}); 
+// router.post("/updateUsuario", function (req, res) {
+//     usuarioController.updateUsuario(req, res);
+// }); 
 module.exports = router;
