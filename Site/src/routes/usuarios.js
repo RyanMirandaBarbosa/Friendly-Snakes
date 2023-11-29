@@ -15,6 +15,10 @@ router.post("/responder", function (req, res) {
     usuarioController.responder(req, res);
 }); 
 
+// router.post("/p1Respondida", function (req, res) {
+//     usuarioController.p1Respondidar(req, res);
+// }); 
+
 // router.post("/responderIdPesquisa", function (req, res) {
 //     usuarioController.responderIdPesquisa(req, res);
 // }); 

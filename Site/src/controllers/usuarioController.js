@@ -104,6 +104,8 @@ function responder(req, res) {
     }
 }
 
+// p1Respondida
+
 // function responderIdPesquisa(res) {
 
 //     if (idPesquisa == undefined) {
@@ -162,6 +164,7 @@ module.exports = {
     autenticar,
     cadastrar,
     responder
+    // p1Respondida
     // responderIdPesquisa,
     // updateUsuario
 }
