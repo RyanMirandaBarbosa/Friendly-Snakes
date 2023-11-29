@@ -163,12 +163,14 @@
     // exibir nome e sobrenome do user na modal
     var nome = sessionStorage.NOME_USUARIO;
     var sobrenome = sessionStorage.SOBRENOME_USUARIO;
+    var idUsuario = sessionStorage.ID_USUARIO;
 
     nome_usuario_menu.innerHTML = `${nome} ${sobrenome}`;
     nome_perfil_user.innerHTML = `${nome} ${sobrenome}`;
 
 
     function validar_p1() {
+        var idUsuario = sessionStorage.ID_USUARIO;
 
         var muitoTranquilo = input_muito_tranquilo_p1.checked;
         var tranquilo = input_tranquilo_p1.checked;
@@ -205,6 +207,7 @@
         } else {
             checkbox_erro_p1.style.display = 'none';
 
+
             fetch("/usuarios/responder", {
                 method: "POST",
                 headers: {
@@ -212,6 +215,8 @@
                 },
                 body: JSON.stringify({
                     resposta_p1Server: resposta_p1
+                    // resposta_p1_perfilServer: resposta_p1_perfil,
+                    // idPesquisaServer: idPesquisa
                 }),
             })
                 .then(resposta => {
@@ -223,8 +228,46 @@
                 .then(dados => {
                     // Processar os dados retornados em caso de sucesso (se necessário)
                     console.log("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+                })
+                .catch(erro => {
+                    // Tratar os erros
+                    console.error(`#ERRO: ${erro.message}`);
+                });
 
-                    fechar_pesquisa1();
+            // fetch("/usuarios/responderIdPesquisa", {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify({
+            //     }),
+            // })
+            //     .then(resposta => {
+            //         if (resposta.ok) {
+            //             var idPesquisa = json.idPesquisa;
+            //         }
+            //         throw new Error("Houve um erro ao tentar realizar o cadastro!");
+            //     })
+            //     .catch(erro => {
+            //         // Tratar os erros
+            //         console.error(`#ERRO: ${erro.message}`);
+            //     });
+
+            fetch("/usuarios/updateUsuario", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    idUsuarioServer: idUsuario,
+                    idPesquisaServer: idPesquisa
+                }),
+            })
+                .then(resposta => {
+                    if (resposta.ok) {
+                        fechar_pesquisa1();
+                    }
+                    throw new Error("Houve um erro ao tentar realizar o cadastro!");
                 })
                 .catch(erro => {
                     // Tratar os erros

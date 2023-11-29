@@ -1,3 +1,4 @@
+process.env.AMBIENTE_PROCESSO = "desenvolvimento"
 require('dotenv').config();
 
 var express = require("express");

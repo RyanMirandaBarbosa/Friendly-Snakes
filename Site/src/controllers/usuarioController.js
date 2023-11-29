@@ -20,7 +20,7 @@ function autenticar(req, res) {
                         console.log(resultadoAutenticar);
 
                         res.json({
-                            id: resultadoAutenticar[0].idUsuario,
+                            idUsuario: resultadoAutenticar[0].idUsuario,
                             email: resultadoAutenticar[0].email,
                             nome: resultadoAutenticar[0].nome,
                             sobrenome: resultadoAutenticar[0].sobreNome,
@@ -87,7 +87,63 @@ function responder(req, res) {
         console.log("Erro: Pesquisa está undefined!");
         res.status(400).send("Pesquisa undefined!");
     } else {
-        pesquisaModel.responder(resposta_p1)
+        usuarioModel.responder(resposta_p1)
+            .then(
+                function (resultado) {
+                    console.log("Pesquisa respondida com sucesso!");
+                    res.json(resultado);
+                    responderIdPesquisa(res);
+                }
+            ).catch(
+                function (erro) {
+                    console.log("Erro na pesquisa:", erro);
+                    res.status(500).json(erro.sqlMessage || "Erro interno no servidor");
+                }
+            );
+    }
+}
+
+function responderIdPesquisa(res) {
+
+    if (idPesquisa == undefined) {
+        // res.status(400).send("Seu email está undefined!");
+    } else {
+        alert("macos me mordão")
+        usuarioModel.responderIdPesquisa()
+            .then(
+                function (resultadoIdPesquisa) {
+                    console.log(`\nResultados encontrados: ${resultadoIdPesquisa.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultadoIdPesquisa)}`); // transforma JSON em String
+
+                    if (resultadoIdPesquisa.length == 1) {
+                        console.log(resultadoIdPesquisa);
+                        console.log("daniel gay <3" + resultadoIdPesquisa);
+                        res.json({
+                            idPesquisa: resultadoIdPesquisa[0].idPesquisa,
+                        });
+                    } else if (resultadoIdPesquisa.length == 0) {
+                        // res.status(403).send("Email e/ou senha inválido(s)");
+                    } else {
+                        // res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                    }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    // res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+function updateUsuario(req, res) {
+    var idUsuario = req.body.idUsuarioServer;
+    var idPesquisa = req.body.idPesquisaServer;
+
+    console.log("Dados recebidos:", idUsuario, idPesquisa);
+
+        usuarioModel.updateUsuario(idUsuario, idPesquisa)
             .then(
                 function (resultado) {
                     console.log("Pesquisa respondida com sucesso!");
@@ -100,10 +156,11 @@ function responder(req, res) {
                 }
             );
     }
-}
 
 module.exports = {
     autenticar,
     cadastrar,
-    responder
+    responder,
+    responderIdPesquisa,
+    updateUsuario
 }
