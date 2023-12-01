@@ -21,7 +21,7 @@
     <title>Perfil | Friendly Snakes</title>
 </head>
 
-<body>
+<body onload="p1_respondida()">
     <header>
 
         <div class="container-header-itens">
@@ -72,14 +72,14 @@
             </div>
             <div>
                 <button id="button_exibir_p1" onclick="exibir_pesquisa1()">Responder</button>
-                <SPan id="span_p1_respondida">Respondido</SPan>
+                <span id="span_p1_respondida">Respondido</span>
             </div>
             <div class="texto">
                 Após conhecer o projeto Friendly Snakes, como você se sente agora em relação as cobras?
             </div>
             <div>
                 <button id="button_exibir_p2" onclick="exibir_pesquisa2()">Responder</button>
-                <SPan id="span_p2_respondida">Respondido</SPan>
+                <span id="span_p2_respondida">Respondido</span>
             </div>
         </div>
     </div>
@@ -175,38 +175,73 @@
     nome_perfil_user.innerHTML = `${nome} ${sobrenome}`;
 
     function p1_respondida() {
-        var fkUsuario = idUsuario;
-
         fetch("/usuarios/p1Respondida", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                fkUsuarioServer: fkUsuario,
-                idUsuarioServer: idUsuario
+                fkUsuarioServer: idUsuario,
             }),
         })
             .then(resposta => {
-                if (resposta.ok) {
-                    // fechar_pesquisa1();
+                if (resposta.status === 200) {
                     button_exibir_p1.style.display = 'none';
                     span_p1_respondida.style.display = 'flex';
-
                     return resposta.json();
+                } else if (resposta.status === 403) {
+                    throw new Error("Acesso proibido. Verifique suas permissões.");
+                } else {
+                    throw new Error("Erro ao verificar se a pesquisa foi respondida!");
                 }
-                throw new Error("Houve um erro ao tentar realizar o cadastro!");
             })
             .then(dados => {
-                // Processar os dados retornados em caso de sucesso (se necessário)
-                console.log("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+                if (dados.fkUsuario) {
+                    button_exibir_p1.style.display = 'none';
+                    span_p1_respondida.style.display = 'flex';
+                } else {
+                    button_exibir_p1.style.display = 'flex';
+                    span_p1_respondida.style.display = 'none';
+                }
+                console.log("Verificação de pesquisa respondida concluída.");
             })
             .catch(erro => {
-                // Tratar os erros
                 console.error(`#ERRO: ${erro.message}`);
             });
+
         return false;
     }
+
+
+
+
+    // function p1_respondida() {
+    //     fetch("/usuarios/p1Respondida", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify({
+    //             fkUsuarioServer: idUsuario,
+    //         }),
+    //     })
+    //         .then(resposta => {
+    //             if (resposta.ok) {
+    //                 return resposta.json();
+    //             }
+    //             throw new Error("Houve um erro ao tentar realizar o cadastro!");
+    //         })
+    //         .then(dados => {
+    //             sessionStorage.FK_USUARIO = dados.fkUsuario; // Corrigido para dados.fkUsuario
+    //             button_exibir_p1.style.display = 'none';
+    //             span_p1_respondida.style.display = 'flex';
+    //             console.log("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+    //         })
+    //         .catch(erro => {
+    //             console.error(`#ERRO: ${erro.message}`);
+    //         });
+    //     return false;
+    // }
 
     function validar_p1() {
 
@@ -245,7 +280,6 @@
         } else {
             checkbox_erro_p1.style.display = 'none';
 
-
             fetch("/usuarios/responder", {
                 method: "POST",
                 headers: {
@@ -253,27 +287,55 @@
                 },
                 body: JSON.stringify({
                     resposta_p1Server: resposta_p1,
-                    idUsuarioServer: idUsuario
+                    idUsuarioServer: idUsuario,
                 }),
             })
                 .then(resposta => {
                     if (resposta.ok) {
                         fechar_pesquisa1();
+                        p1_respondida();
                         return resposta.json();
                     }
                     throw new Error("Houve um erro ao tentar realizar o cadastro!");
                 })
                 .then(dados => {
-                    // Processar os dados retornados em caso de sucesso (se necessário)
                     console.log("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
                 })
                 .catch(erro => {
-                    // Tratar os erros
                     console.error(`#ERRO: ${erro.message}`);
                 });
             return false;
         }
     }
+    //         fetch("/usuarios/responder", {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify({
+    //                 resposta_p1Server: resposta_p1,
+    //                 idUsuarioServer: idUsuario
+    //             }),
+    //         })
+    //             .then(resposta => {
+    //                 if (resposta.ok) {
+    //                     fechar_pesquisa1();
+    //                     p1_respondida();
+    //                     return resposta.json();
+    //                 }
+    //                 throw new Error("Houve um erro ao tentar realizar o cadastro!");
+    //             })
+    //             .then(dados => {
+    //                 // Processar os dados retornados em caso de sucesso (se necessário)
+    //                 console.log("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+    //             })
+    //             .catch(erro => {
+    //                 // Tratar os erros
+    //                 console.error(`#ERRO: ${erro.message}`);
+    //             });
+    //         return false;
+    //     }
+    // }
 
     function validar_p2() {
 
@@ -338,5 +400,6 @@
                 });
         }
     }
+
 
 </script>

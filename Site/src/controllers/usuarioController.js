@@ -104,67 +104,42 @@ function responder(req, res) {
     }
 }
 
-// p1Respondida
+function p1Respondida(req, res) {
+    var fkUsuario = req.body.fkUsuarioServer;
 
-// function responderIdPesquisa(res) {
+    console.log("Dados recebidos:", fkUsuario);
 
-//     if (idPesquisa == undefined) {
-//         // res.status(400).send("Seu email está undefined!");
-//     } else {
-//         alert("macos me mordão")
-//         usuarioModel.responderIdPesquisa()
-//             .then(
-//                 function (resultadoIdPesquisa) {
-//                     console.log(`\nResultados encontrados: ${resultadoIdPesquisa.length}`);
-//                     console.log(`Resultados: ${JSON.stringify(resultadoIdPesquisa)}`); // transforma JSON em String
+    if (fkUsuario == undefined) {
+        console.log("Erro: Pesquisa está undefined!");
+        res.status(400).send("Pesquisa undefined!");
+    } else {
+        usuarioModel.p1Respondida(fkUsuario)
+        .then(function (resultadoAutenticar) {
+            console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+            console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
 
-//                     if (resultadoIdPesquisa.length == 1) {
-//                         console.log(resultadoIdPesquisa);
-//                         console.log("daniel gay <3" + resultadoIdPesquisa);
-//                         res.json({
-//                             idPesquisa: resultadoIdPesquisa[0].idPesquisa,
-//                         });
-//                     } else if (resultadoIdPesquisa.length == 0) {
-//                         // res.status(403).send("Email e/ou senha inválido(s)");
-//                     } else {
-//                         // res.status(403).send("Mais de um usuário com o mesmo login e senha!");
-//                     }
-//                 }
-//             ).catch(
-//                 function (erro) {
-//                     console.log(erro);
-//                     console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
-//                     // res.status(500).json(erro.sqlMessage);
-//                 }
-//             );
-//     }
-// }
-
-// function updateUsuario(req, res) {
-//     var idUsuario = req.body.idUsuarioServer;
-//     var idPesquisa = req.body.idPesquisaServer;
-
-//     console.log("Dados recebidos:", idUsuario, idPesquisa);
-
-//         usuarioModel.updateUsuario(idUsuario, idPesquisa)
-//             .then(
-//                 function (resultado) {
-//                     console.log("Pesquisa respondida com sucesso!");
-//                     res.json(resultado);
-//                 }
-//             ).catch(
-//                 function (erro) {
-//                     console.log("Erro na pesquisa:", erro);
-//                     res.status(500).json(erro.sqlMessage || "Erro interno no servidor");
-//                 }
-//             );
-//     }
+            if (resultadoAutenticar.length == 1) {
+                console.log(resultadoAutenticar);
+                res.json({
+                    fkUsuario: resultadoAutenticar[0].fkUsuario
+                });
+            } else if (resultadoAutenticar.length == 0) {
+                res.status(403).send("Nenhuma resposta encontrada para o usuário.");
+            } else {
+                res.status(403).send("Mais de uma resposta encontrada para o usuário.");
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            console.log("\nHouve um erro ao verificar se a pesquisa foi respondida! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+    }
+}
 
 module.exports = {
     autenticar,
     cadastrar,
-    responder
-    // p1Respondida
-    // responderIdPesquisa,
-    // updateUsuario
+    responder,
+    p1Respondida
 }
