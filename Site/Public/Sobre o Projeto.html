@@ -24,7 +24,7 @@
     <title>Sobre o Projeto | Friendly Snakes</title>
 </head>
 
-<body>
+<body >
 
     <header>
 
@@ -132,6 +132,70 @@
     var nome = sessionStorage.NOME_USUARIO;
     var sobrenome = sessionStorage.SOBRENOME_USUARIO;
 
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     infGraficos();
+        // });
+
+
+
+    function infGraficos() {
+    return fetch("/grafico/infGraficos", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            // Adicione dados para enviar ao servidor, se necessário
+        })
+    })
+    .then(function (resposta) {
+        console.log("ESTOU NO THEN DO infGraficos()!");
+
+        if (resposta.ok) {
+            return resposta.json();
+        } else {
+            console.log("Houve um erro ao tentar puxar ifoGrafico!");
+            return resposta.text().then(function (texto) {
+                throw new Error(texto);
+            });
+        }
+    })
+    .then(function (json) {
+        console.log(json);
+        console.log(JSON.stringify(json));
+
+        // Certifique-se de validar as propriedades antes de acessá-las
+        if (json) {
+            sessionStorage.P1_MUITO_TRANQUILO = json.P1_muitoTranquilo;
+            sessionStorage.P1_TRANQUILO = json.P1_tranquilo;
+            sessionStorage.P1_NEUTRO = json.P1_neutro;
+            sessionStorage.P1_MEDO = json.P1_medo;
+            sessionStorage.P1_MUITO_MEDO = json.P1_muitoMedo;
+
+            sessionStorage.P2_MUITO_TRANQUILO = json.P2_muitoTranquilo;
+            sessionStorage.P2_TRANQUILO = json.P2_tranquilo;
+            sessionStorage.P2_NEUTRO = json.P2_neutro;
+            sessionStorage.P2_MEDO = json.P2_medo;
+            sessionStorage.P2_MUITO_MEDO = json.P2_muitoMedo;
+        }
+    })
+    .catch(function (erro) {
+        console.log(erro);
+        // Adicione lógica para lidar com erros, se necessário
+    });
+}
+    var p1_muito_tranquilo = Number(sessionStorage.P1_MUITO_TRANQUILO);
+    var p1_tranquilo = Number(sessionStorage.P1_TRANQUILO);
+    var p1_neutro = Number(sessionStorage.P1_NEUTRO);
+    var p1_medo = Number(sessionStorage.P1_MEDO);
+    var p1_muito_medo = Number(sessionStorage.P1_MUITO_MEDO);
+
+    var p2_muito_tranquilo = Number(sessionStorage.P2_MUITO_TRANQUILO);
+    var p2_tranquilo = Number(sessionStorage.P2_TRANQUILO);
+    var p2_neutro = Number(sessionStorage.P2_NEUTRO);
+    var p2_medo = Number(sessionStorage.P2_MEDO);
+    var p2_muito_medo = Number(sessionStorage.P2_MUITO_MEDO);
+
     nome_usuario_menu.innerHTML = `${nome} ${sobrenome}`;
 
     const ctx1 = document.getElementById('myChart1');
@@ -153,7 +217,7 @@
             ],
             datasets: [{
                 label: 'Quantidade de Pessoas',
-                data: [5, 5, 5, 5, 5],
+                data: [p1_muito_tranquilo, p1_tranquilo, p1_neutro, p1_medo, p1_muito_medo],
                 backgroundColor: [
                     '#457fde',
                     '#45de5c',
@@ -177,7 +241,7 @@
             ],
             datasets: [{
                 label: 'Quantidade de Pessoas',
-                data: [5, 5, 5, 5, 5],
+                data: [p2_muito_tranquilo, p2_tranquilo, p2_neutro, p2_medo, p2_muito_medo],
                 backgroundColor: [
                     '#457fde',
                     '#45de5c',
@@ -195,14 +259,14 @@
             labels: ['Muito Tranquilo', 'Tranquilo', 'Neutro', 'Medo', 'Muito Medo'],
             datasets: [{
                 label: 'Antes',
-                data: [12, 19, 3, 5, 2, 3],
+                data: [p1_muito_tranquilo, p1_tranquilo, p1_neutro, p1_medo, p1_muito_medo],
                 backgroundColor: ['#de4545'],
                 borderColor: ['#ffffff'],
                 borderWidth: 3
             },
             {
                 label: 'Depois',
-                data: [5, 5, 5, 7, 8, 9],
+                data: [p2_muito_tranquilo, p2_tranquilo, p2_neutro, p2_medo, p2_muito_medo],
                 backgroundColor: ['#457fde'],
                 borderColor: ['#ffffff'],
                 borderWidth: 3
@@ -217,6 +281,12 @@
             }
         }
     });
+
+    document.addEventListener('DOMContentLoaded', function () {
+            infGraficos();
+        });
+
+        infGraficos();
 </script>
 
 </html>

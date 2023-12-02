@@ -104,6 +104,32 @@ function responder(req, res) {
     }
 }
 
+function responder_p2(req, res) {
+    var resposta_p2 = req.body.resposta_p2Server;
+    var idUsuario = req.body.idUsuarioServer;
+
+    console.log("Dados recebidos:", resposta_p2, idUsuario);
+
+    if (resposta_p2 == undefined) {
+        console.log("Erro: Pesquisa está undefined!");
+        res.status(400).send("Pesquisa undefined!");
+    } else {
+        usuarioModel.responder_p2(resposta_p2, idUsuario)
+            .then(
+                function (resultado) {
+                    console.log("Pesquisa respondida com sucesso!");
+                    res.json(resultado);
+                    // responder_p2IdPesquisa(res);
+                }
+            ).catch(
+                function (erro) {
+                    console.log("Erro na pesquisa:", erro);
+                    res.status(500).json(erro.sqlMessage || "Erro interno no servidor");
+                }
+            );
+    }
+}
+
 function p1Respondida(req, res) {
     var fkUsuario = req.body.fkUsuarioServer;
 
@@ -137,9 +163,44 @@ function p1Respondida(req, res) {
     }
 }
 
+function p2Respondida(req, res) {
+    var fkUsuario = req.body.fkUsuarioServer;
+
+    console.log("Dados recebidos:", fkUsuario);
+
+    if (fkUsuario == undefined) {
+        console.log("Erro: Pesquisa está undefined!");
+        res.status(400).send("Pesquisa undefined!");
+    } else {
+        usuarioModel.p2Respondida(fkUsuario)
+        .then(function (resultadoAutenticar) {
+            console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+            console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+
+            if (resultadoAutenticar.length == 1) {
+                console.log(resultadoAutenticar);
+                res.json({
+                    fkUsuario: resultadoAutenticar[0].fkUsuario
+                });
+            } else if (resultadoAutenticar.length == 0) {
+                res.status(403).send("Nenhuma resposta encontrada para o usuário.");
+            } else {
+                res.status(403).send("Mais de uma resposta encontrada para o usuário.");
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            console.log("\nHouve um erro ao verificar se a pesquisa foi respondida! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+    }
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     responder,
-    p1Respondida
+    p1Respondida,
+    responder_p2,
+    p2Respondida
 }

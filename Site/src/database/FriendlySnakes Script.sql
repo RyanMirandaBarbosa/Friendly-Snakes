@@ -69,4 +69,18 @@ select * from Pesquisa2;
 select * from Publicacao;
 select * from Comentario;
 
--- select resposta, count(*) as 'total' from Pesquisa1 group by resposta; -- where pesquisa = 'Neutro';
+select resposta, count(*) as 'total' from Pesquisa1 group by resposta; -- where pesquisa = 'Neutro';
+SELECT resposta, COUNT(*) AS 'total' FROM Pesquisa1 WHERE resposta = 'Muito Medo' GROUP BY resposta;
+SELECT resposta, COUNT(*) AS 'total' FROM Pesquisa1 WHERE resposta = 'Medo' GROUP BY resposta;
+SELECT resposta, COUNT(*) AS 'total' FROM Pesquisa1 WHERE resposta = 'Neutro' GROUP BY resposta;
+SELECT resposta, COUNT(*) AS 'total' FROM Pesquisa1 WHERE resposta = 'Tranquilo' GROUP BY resposta;
+SELECT resposta, COUNT(*) AS 'total' FROM Pesquisa1 WHERE resposta = 'Muito Tranquilo' GROUP BY resposta;
+
+
+insert into Pesquisa1 values
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Muito Tranquilo', null),
+(null, 'Muito Medo', null),
+(null, 'Medo', null);
