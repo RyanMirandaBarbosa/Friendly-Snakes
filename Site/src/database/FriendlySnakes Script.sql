@@ -62,6 +62,18 @@ describe Especies;
 describe Publicacao;
 describe Comentario;
 
+	SELECT 
+            Publicacao.idPublicaco,
+            Publicacao.conteudo,
+			Publicacao.fkUsuario,
+            Usuario.idUsuario,
+            Usuario.nome,
+            Usuario.sobreNome,
+            u.senha
+        FROM aviso a
+            INNER JOIN usuario u
+                ON a.fk_usuario = u.id;
+
 select * from Usuario;
 select * from Especies;
 select * from Pesquisa1;
@@ -78,9 +90,13 @@ SELECT resposta, COUNT(*) AS 'total' FROM Pesquisa1 WHERE resposta = 'Muito Tran
 
 
 insert into Pesquisa1 values
-(null, 'Neutro', null),
-(null, 'Neutro', null),
-(null, 'Neutro', null),
-(null, 'Muito Tranquilo', null),
-(null, 'Muito Medo', null),
-(null, 'Medo', null);
+(null, 'Tranquilo', null),
+(null, 'Tranquilo', null),
+(null, 'Tranquilo', null),
+(null, 'Medo', null),
+(null, 'Medo', null),
+(null, 'Medo', null),
+(null, 'Medo', null),
+(null, 'Medo', null),
+(null, 'Muito Medo', null),(null, 'Muito Medo', null),(null, 'Muito Medo', null);
+

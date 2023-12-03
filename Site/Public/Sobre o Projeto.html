@@ -24,7 +24,7 @@
     <title>Sobre o Projeto | Friendly Snakes</title>
 </head>
 
-<body >
+<body onload="infGraficos()">
 
     <header>
 
@@ -132,58 +132,61 @@
     var nome = sessionStorage.NOME_USUARIO;
     var sobrenome = sessionStorage.SOBRENOME_USUARIO;
 
-        // document.addEventListener('DOMContentLoaded', function () {
-        //     infGraficos();
-        // });
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     infGraficos();
+    // });
 
 
 
     function infGraficos() {
-    return fetch("/grafico/infGraficos", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            // Adicione dados para enviar ao servidor, se necessário
+        fetch("/grafico/infGraficos", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // Adicione dados para enviar ao servidor, se necessário
+            })
         })
-    })
-    .then(function (resposta) {
-        console.log("ESTOU NO THEN DO infGraficos()!");
+            .then(function (resposta) {
+                console.log("ESTOU NO THEN DO infGraficos()!");
 
-        if (resposta.ok) {
-            return resposta.json();
-        } else {
-            console.log("Houve um erro ao tentar puxar ifoGrafico!");
-            return resposta.text().then(function (texto) {
-                throw new Error(texto);
+                if (resposta.ok) {
+                    // window.location = "./Sobre o Projeto.html";
+                    return resposta.json();
+                } else {
+                    console.log("Houve um erro ao tentar puxar ifoGrafico!");
+                    return resposta.text().then(function (texto) {
+                        throw new Error(texto);
+                    });
+                }
+            })
+            .then(function (json) {
+                console.log(json);
+                console.log(JSON.stringify(json));
+
+                // Certifique-se de validar as propriedades antes de acessá-las
+                if (json) {
+                    sessionStorage.P1_MUITO_TRANQUILO = json.P1_muitoTranquilo;
+                    sessionStorage.P1_TRANQUILO = json.P1_tranquilo;
+                    sessionStorage.P1_NEUTRO = json.P1_neutro;
+                    sessionStorage.P1_MEDO = json.P1_medo;
+                    sessionStorage.P1_MUITO_MEDO = json.P1_muitoMedo;
+
+                    sessionStorage.P2_MUITO_TRANQUILO = json.P2_muitoTranquilo;
+                    sessionStorage.P2_TRANQUILO = json.P2_tranquilo;
+                    sessionStorage.P2_NEUTRO = json.P2_neutro;
+                    sessionStorage.P2_MEDO = json.P2_medo;
+                    sessionStorage.P2_MUITO_MEDO = json.P2_muitoMedo;
+                }
+            })
+            .catch(function (erro) {
+                console.log(erro);
+                // Adicione lógica para lidar com erros, se necessário
             });
-        }
-    })
-    .then(function (json) {
-        console.log(json);
-        console.log(JSON.stringify(json));
+    }
 
-        // Certifique-se de validar as propriedades antes de acessá-las
-        if (json) {
-            sessionStorage.P1_MUITO_TRANQUILO = json.P1_muitoTranquilo;
-            sessionStorage.P1_TRANQUILO = json.P1_tranquilo;
-            sessionStorage.P1_NEUTRO = json.P1_neutro;
-            sessionStorage.P1_MEDO = json.P1_medo;
-            sessionStorage.P1_MUITO_MEDO = json.P1_muitoMedo;
-
-            sessionStorage.P2_MUITO_TRANQUILO = json.P2_muitoTranquilo;
-            sessionStorage.P2_TRANQUILO = json.P2_tranquilo;
-            sessionStorage.P2_NEUTRO = json.P2_neutro;
-            sessionStorage.P2_MEDO = json.P2_medo;
-            sessionStorage.P2_MUITO_MEDO = json.P2_muitoMedo;
-        }
-    })
-    .catch(function (erro) {
-        console.log(erro);
-        // Adicione lógica para lidar com erros, se necessário
-    });
-}
+    
     var p1_muito_tranquilo = Number(sessionStorage.P1_MUITO_TRANQUILO);
     var p1_tranquilo = Number(sessionStorage.P1_TRANQUILO);
     var p1_neutro = Number(sessionStorage.P1_NEUTRO);
@@ -282,11 +285,6 @@
         }
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
-            infGraficos();
-        });
-
-        infGraficos();
 </script>
 
 </html>

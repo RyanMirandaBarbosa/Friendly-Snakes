@@ -9,7 +9,7 @@
 }
 
 body {
-    background-color: #474747;
+    background-color: #151515;
 }
 
 
@@ -17,11 +17,11 @@ body {
 header {
     width: 100%;
     height: 130px;
-    background-color: #373737;
+    background-color: #101010;
     display: flex;
     align-items: center;
-    border-bottom: 3px solid #171717;
-    box-shadow: 50px 50px 50px 50px rgba(27, 27, 27, 0.25);
+    border-bottom: 3px solid #fff;
+    box-shadow: 0px 0px 100px 0px rgba(255, 255, 255, 0.25);
 }
 
 .container-header-itens {
@@ -36,7 +36,7 @@ header {
 /* menu */
 #menu {
     padding: 20px;
-    background-color: #272727b2;
+    background-color: #020202b2;
     position: absolute;
     top: 0;
     right: 0;
@@ -49,7 +49,7 @@ header {
     border-style: solid;
     border-color: white;
     border-radius: 50px 10px 50px 10px;
-    box-shadow: 0px 0px 10px 10px rgba(39, 39, 39, 0.25);
+    box-shadow: 0px 0px 10px 0px rgba(39, 39, 39, 0.25);
     animation: moveToRight 0.5s ease-in-out;
     }
 
@@ -87,14 +87,14 @@ header {
 
 .nav-bar {
     width: 300px;
-    background-color: #474747;
+    background-color: #151515;
     height: auto;
     text-align: center;
     border-width: 5px 3px 0px 3px;
     border-style: solid;
     border-color: white;
     border-radius: 50px 10px 50px 10px;
-    box-shadow: 0px 0px 10px 10px rgba(39, 39, 39, 0.25);
+    box-shadow: 0px 0px 50px 0px rgba(255, 255, 255, 0.25);
 }
 
 .menu {
@@ -125,12 +125,12 @@ header {
     padding: 30px;
     width: 600px;
     height: auto;
-    background-color: #676767;
+    background-color: #303030;
     border-width: 5px 3px 0px 3px;
     border-style: solid;
     border-color: white;
     border-radius: 50px 10px 50px 10px;
-    box-shadow: 0px 0px 10px 10px rgba(39, 39, 39, 0.25);
+    box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.25);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -184,12 +184,12 @@ header {
     padding: 50px;
     width: 80%;
     height: auto;
-    background-color: #676767;
+    background-color: #303030;
     border-width: 5px 3px 0px 3px;
     border-style: solid;
     border-color: white;
     border-radius: 50px 10px 50px 10px;
-    box-shadow: 0px 0px 10px 10px rgba(39, 39, 39, 0.25);
+    box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.25);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -231,12 +231,12 @@ header {
     margin-bottom: 50px;
     width: 100%;
     height: auto;
-    background-color: #878787;
+    background-color: #505050;
     border-width: 5px 3px 0px 3px;
     border-style: solid;
     border-color: white;
     border-radius: 50px 10px 50px 10px;
-    box-shadow: 0px 0px 10px 10px rgba(39, 39, 39, 0.25);
+    box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.25);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -261,12 +261,12 @@ header {
     padding: 50px;
     width: 80%;
     height: auto;
-    background-color: #676767;
+    background-color: #303030;
     border-width: 5px 3px 0px 3px;
     border-style: solid;
     border-color: white;
     border-radius: 50px 10px 50px 10px;
-    box-shadow: 0px 0px 10px 10px rgba(39, 39, 39, 0.25);
+    box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.25);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -276,6 +276,87 @@ header {
 .card-padrao button {
     width: 150px;
 }
+
+.catalogo {
+    margin: 100px;
+    margin-bottom: 0px;
+    padding: 50px;
+    height: auto;
+    background-color: #303030;
+    border-width: 5px 3px 0px 3px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 50px 10px 50px 10px;
+    box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap; /* Adicionado para permitir que os itens quebrem para a próxima linha */
+}
+
+.dex {
+    background-color: #505050;
+    margin: 20px;
+    width: 250px;
+    height: 200px;
+    border-width: 5px 3px 0px 3px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 50px 10px 50px 10px;
+    box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.dex img {
+    width: 150px;
+    border-width: 5px 3px 0px 3px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 50px 10px 50px 10px;
+    box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.25);
+}
+
+/* .catalogo {
+    margin: 100px;
+    margin-bottom: 0px;
+    padding: 50px;
+    width: 80%;
+    height: auto;
+    background-color: #303030;
+    border-width: 5px 3px 0px 3px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 50px 10px 50px 10px;
+    box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.dex {
+    background-color: #505050;
+    margin: 20px;
+    width: 250px;
+    height: 200px;
+    border-width: 5px 3px 0px 3px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 50px 10px 50px 10px;
+    box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.dex img {
+    width: 150px;
+} */
 
 /* line */
 .line {
@@ -294,7 +375,7 @@ header {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60%;
-    background-color: #676767;
+    background-color: #303030;
     display: none;
     align-items: center;
     flex-direction: column;
@@ -304,7 +385,7 @@ header {
     border-style: solid;
     border-color: white;
     border-radius: 50px 10px 50px 10px;
-    box-shadow: 0px 0px 10px 1000px rgba(39, 39, 39, 0.767);
+    box-shadow: 0px 0px 20px 1000px rgba(255, 255, 255, 0.25);
 }
 
 #pesquisa1 button {
@@ -372,7 +453,7 @@ header {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60%;
-    background-color: #676767;
+    background-color: #303030;
     display: none;
     align-items: center;
     flex-direction: column;
@@ -382,7 +463,7 @@ header {
     border-style: solid;
     border-color: white;
     border-radius: 50px 10px 50px 10px;
-    box-shadow: 0px 0px 10px 1000px rgba(39, 39, 39, 0.767);
+    box-shadow: 0px 0px 20px 1000px rgba(255, 255, 255, 0.25);
 }
 
 #pesquisa2 button {
@@ -457,7 +538,7 @@ header {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60%;
-    background-color: #676767;
+    background-color: #303030;
     display: none;
     align-items: center;
     flex-direction: column;
@@ -467,7 +548,7 @@ header {
     border-style: solid;
     border-color: white;
     border-radius: 50px 10px 50px 10px;
-    box-shadow: 0px 0px 10px 1000px rgba(39, 39, 39, 0.767);
+    box-shadow: 0px 0px 20px 1000px rgba(255, 255, 255, 0.25);
 }
 
 #criar_public button {
@@ -508,12 +589,12 @@ header {
     display: flex;
     flex-direction: column;
     padding: 40px;
-    background-color: #878787;
+    background-color: #505050;
     border-width: 5px 3px 0px 3px;
     border-style: solid;
     border-color: white;
     border-radius: 50px 10px 50px 10px;
-    box-shadow: 0px 0px 10px 10px rgba(39, 39, 39, 0.25);
+    box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.25);
 }
 
 .publicacoes {
@@ -521,13 +602,13 @@ header {
     height: auto;
     display: flex;
     align-items: center;
-    flex-direction: column;
+    flex-direction: column-reverse;
 }
 
-#public {
+.public {
     margin-bottom: 50px;
     width: 60%;
-    background-color: #676767;
+    background-color: #303030;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -537,10 +618,10 @@ header {
     border-style: solid;
     border-color: white;
     border-radius: 50px 10px 50px 10px;
-    box-shadow: 0px 0px 10px 10px rgba(39, 39, 39, 0.25);
+    box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.25);
 }
 
-#public button {
+.public button {
     width: 200px;
 }
 
@@ -553,12 +634,12 @@ header {
     display: flex;
     flex-direction: column;
     padding: 40px;
-    background-color: #878787;
+    background-color: #505050;
     border-width: 5px 3px 0px 3px;
     border-style: solid;
     border-color: white;
     border-radius: 50px 10px 50px 10px;
-    box-shadow: 0px 0px 10px 10px rgba(39, 39, 39, 0.25);
+    box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.25);
 }
 
 #resposta {
@@ -567,7 +648,7 @@ header {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60%;
-    background-color: #676767;
+    background-color: #303030;
     display: none;
     align-items: center;
     flex-direction: column;
@@ -577,7 +658,7 @@ header {
     border-style: solid;
     border-color: white;
     border-radius: 50px 10px 50px 10px;
-    box-shadow: 0px 0px 10px 1000px rgba(39, 39, 39, 0.767);
+    box-shadow: 0px 0px 20px 1000px rgba(255, 255, 255, 0.25);
 }
 
 #resposta button {
@@ -618,7 +699,7 @@ input {
     font-size: 20px;
     width: 250px;
     height: 40px;
-    background-color: #878787;
+    background-color: #505050;
     border-width: 5px 3px 0px 3px;
     border-style: solid;
     border-color: white;
@@ -628,14 +709,14 @@ input {
 }
 
 input:hover {
-    box-shadow: 0px 0px 10px 10px rgba(39, 39, 39, 0.25);
+    box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.25);
 }
 
 /* button */
 button {
     height: 40px;
     font-size: 20px;
-    background-color: #878787;
+    background-color: #505050;
     border-width: 5px 3px 0px 3px;
     border-style: solid;
     border-color: white;
@@ -645,12 +726,12 @@ button {
 
 button:hover {
     transition: 1s;
-    box-shadow: 0px 0px 10px 10px rgba(39, 39, 39, 0.25);
+    box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.25);
 }
 
 button:active {
     transition: 0s;
-    box-shadow: 0px 0px 10px 5px rgba(39, 39, 39, 0.25);
+    box-shadow: 0px 0px 10px 5px rgba(255, 255, 255, 0.25);
     transform: translateY(4px);
 }
 

@@ -29,10 +29,12 @@ app.use(cors(corsOptions));
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var graficoRouter = require("./src/routes/grafico");
+var publiRouter = require("./src/routes/publi");
 
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/grafico", graficoRouter);
+app.use("/publi", publiRouter);
 
 app.listen(PORTA, function () {
     console.log(`Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar: http://localhost:${PORTA} \n

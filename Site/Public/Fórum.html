@@ -21,7 +21,7 @@
     <title>Fórum | Friendly Snakes</title>
 </head>
 
-<body>
+<body onload="atualizarFeed()">
     <header>
 
         <div class="container-header-itens">
@@ -74,13 +74,14 @@
             <div class="nome">Criar Publicação</div>
 
             <div class="line"></div>
-            <textarea class="text-public" name="" id="" cols="30" rows="10"></textarea>
+            <textarea class="text-public" name="" id="texto_publicar" cols="30" rows="10"
+                style="resize: none"></textarea>
             <div>
-                <button>Publicar</button>
+                <button onclick="publicar()">Publicar</button>
             </div>
         </div>
 
-        <div class="publicacoes">
+        <div id="publicacaoes_id" class="publicacoes">
 
             <div id="resposta">
 
@@ -98,26 +99,26 @@
                     <button>Responder</button>
                 </div>
             </div>
+            
+            <!-- <div id="public">
 
-            <div id="public">
-
-                <div class="nome">Ryan Miranda Barbosa</div>
+                 <div class="nome">Ryan Miranda Barbosa</div>
 
                 <div class="line"></div>
+
                 <div class="texto-publicacao">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt expedita nobis inventore adipisci
                     autem minima unde a neque quasi qui nemo quaerat facere, dolore sapiente distinctio sint deserunt
                     ipsa ipsum!
                 </div>
+
                 <div class="line"></div>
+
                 <div>
                     <button onclick="responder()">Responder</button>
-                </div>
+                </div> 
 
-                <div>
-
-                </div>
-            </div>
+            </div> -->
 
         </div>
 
@@ -133,4 +134,112 @@
     var sobrenome = sessionStorage.SOBRENOME_USUARIO;
 
     nome_usuario_menu.innerHTML = `${nome} ${sobrenome}`;
+
+    function limparPubli() {
+        texto_publicar.innerHTML = "";
+    }
+
+    function publicar() {
+        var idUsuario = sessionStorage.ID_USUARIO;
+
+        var corpo = {
+            descricao: texto_publicar.value
+        }
+
+        fetch(`/publi/publicar/${idUsuario}`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(corpo)
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
+                window.location = "Fórum.html";
+                limparPubli();
+                fechar_criar_public();
+                // 
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // 
+        });
+
+        return false;
+
+    }
+
+    function atualizarFeed() {
+        fetch("/publi/listar").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("publicacaoes_id");
+                    var mensagem = document.createElement("span");
+                    // mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    var feedContainer = document.getElementById("publicacaoes_id");
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+                        // Criando e manipulando elementos do HTML via JavaScript
+                        var divPublicacao = document.createElement("div");
+                        var divNome = document.createElement("div");
+                        var divLine1 = document.createElement("div");
+                        var divTextoPublicacao = document.createElement("div");
+                        // var divLine2 = document.createElement("div");
+                        var divButtons = document.createElement("div");
+                        var btnResponder = document.createElement("button");
+
+                        divNome.innerHTML = `${publicacao.nome} ${publicacao.sobreNome}`; // Usando o nome do autor
+                        divLine1.innerHTML = "";
+                        divTextoPublicacao.innerHTML = publicacao.conteudo; // Usando a descrição da publicação
+                        btnResponder.innerHTML = "Responder";
+                        btnResponder.setAttribute("onclick", `responder(${publicacao.idPublicacao})`);
+
+                        // Adicionando classes aos elementos
+                        divPublicacao.className = "public";
+                        divNome.className = "nome";
+                        divLine1.className = "line";
+                        divTextoPublicacao.className = "texto-publicacao";
+                        divLine1.className = "line";
+                        divButtons.className = "div-buttons";
+                        btnResponder.className = "publicacao-btn-editar";
+
+                        // Adicionando os elementos criados à estrutura
+                        divPublicacao.appendChild(divNome);
+                        divPublicacao.appendChild(divLine1);
+                        divPublicacao.appendChild(divTextoPublicacao);
+                        // divPublicacao.appendChild(divLine2);
+                        divPublicacao.appendChild(divButtons);
+                        divButtons.appendChild(btnResponder);
+
+                        // Adicionando a publicação ao container
+                        feedContainer.appendChild(divPublicacao);
+                    }
+
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+
+        });
+    }
+
 </script>
