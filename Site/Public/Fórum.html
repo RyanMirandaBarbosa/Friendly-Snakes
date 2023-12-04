@@ -82,44 +82,6 @@
         </div>
 
         <div id="publicacaoes_id" class="publicacoes">
-
-            <div id="resposta">
-
-                <div class="close">
-                    <button onclick="fechar_responder()">
-                        <i class="bi bi-x-lg"></i>
-                    </button>
-                </div>
-
-                <div class="nome">Responder</div>
-
-                <div class="line"></div>
-                <textarea class="text-public" name="" id="" cols="30" rows="10"></textarea>
-                <div>
-                    <button>Responder</button>
-                </div>
-            </div>
-            
-            <!-- <div id="public">
-
-                 <div class="nome">Ryan Miranda Barbosa</div>
-
-                <div class="line"></div>
-
-                <div class="texto-publicacao">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt expedita nobis inventore adipisci
-                    autem minima unde a neque quasi qui nemo quaerat facere, dolore sapiente distinctio sint deserunt
-                    ipsa ipsum!
-                </div>
-
-                <div class="line"></div>
-
-                <div>
-                    <button onclick="responder()">Responder</button>
-                </div> 
-
-            </div> -->
-
         </div>
 
     </div>
@@ -157,11 +119,10 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
                 window.location = "Fórum.html";
                 limparPubli();
                 fechar_criar_public();
-                // 
+                 
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {
@@ -169,7 +130,7 @@
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-            // 
+           
         });
 
         return false;
@@ -201,14 +162,14 @@
                         var divLine1 = document.createElement("div");
                         var divTextoPublicacao = document.createElement("div");
                         // var divLine2 = document.createElement("div");
-                        var divButtons = document.createElement("div");
-                        var btnResponder = document.createElement("button");
+                        // var divButtons = document.createElement("div");
+                        // var btnResponder = document.createElement("button");
 
                         divNome.innerHTML = `${publicacao.nome} ${publicacao.sobreNome}`; // Usando o nome do autor
                         divLine1.innerHTML = "";
                         divTextoPublicacao.innerHTML = publicacao.conteudo; // Usando a descrição da publicação
-                        btnResponder.innerHTML = "Responder";
-                        btnResponder.setAttribute("onclick", `responder(${publicacao.idPublicacao})`);
+                        // btnResponder.innerHTML = "Responder";
+                        // btnResponder.setAttribute("onclick", `responder(${publicacao.idPublicacao})`);
 
                         // Adicionando classes aos elementos
                         divPublicacao.className = "public";
@@ -216,16 +177,16 @@
                         divLine1.className = "line";
                         divTextoPublicacao.className = "texto-publicacao";
                         divLine1.className = "line";
-                        divButtons.className = "div-buttons";
-                        btnResponder.className = "publicacao-btn-editar";
+                        // divButtons.className = "div-buttons";
+                        // btnResponder.className = "publicacao-btn-editar";
 
                         // Adicionando os elementos criados à estrutura
                         divPublicacao.appendChild(divNome);
                         divPublicacao.appendChild(divLine1);
                         divPublicacao.appendChild(divTextoPublicacao);
                         // divPublicacao.appendChild(divLine2);
-                        divPublicacao.appendChild(divButtons);
-                        divButtons.appendChild(btnResponder);
+                        // divPublicacao.appendChild(divButtons);
+                        // divButtons.appendChild(btnResponder);
 
                         // Adicionando a publicação ao container
                         feedContainer.appendChild(divPublicacao);

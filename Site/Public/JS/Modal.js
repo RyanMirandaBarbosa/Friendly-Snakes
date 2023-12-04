@@ -32,11 +32,3 @@ function criar_publicacao() {
 function fechar_criar_public() {
     criar_public.style.display = 'none';
 }
-
-function responder() {
-    resposta.style.display = 'flex';
-}
-
-function fechar_responder() {
-    resposta.style.display = 'none';
-}
