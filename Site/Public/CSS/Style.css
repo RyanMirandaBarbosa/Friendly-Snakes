@@ -51,16 +51,17 @@ header {
     border-radius: 50px 10px 50px 10px;
     box-shadow: 0px 0px 10px 0px rgba(39, 39, 39, 0.25);
     animation: moveToRight 0.5s ease-in-out;
+}
+
+@keyframes moveToRight {
+    0% {
+        transform: translateX(400px);
     }
 
-    @keyframes moveToRight {
-      0% {
-        transform: translateX(400px);
-      }
-      100% {
+    100% {
         transform: translateX(0);
-      }
     }
+}
 
 #menu .button-menu {
     background-color: #00000000;
@@ -206,7 +207,19 @@ header {
     width: 180px;
     font-size: 40px;
     text-align: center;
-}   
+}
+
+.legend-mitos {
+    width: 120px;
+    font-size: 40px;
+    text-align: center;
+}
+
+.legend-conhecimento {
+    width: 380px;
+    font-size: 40px;
+    text-align: center;
+}
 
 /* texto */
 .texto {
@@ -292,7 +305,8 @@ header {
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    flex-wrap: wrap; /* Adicionado para permitir que os itens quebrem para a próxima linha */
+    flex-wrap: wrap;
+    /* Adicionado para permitir que os itens quebrem para a próxima linha */
 }
 
 .dex {
@@ -705,7 +719,7 @@ input {
     border-color: white;
     border-radius: 50px 10px 50px 10px;
     cursor: pointer;
-    transition: 1.5s;     
+    transition: 1.5s;
 }
 
 input:hover {
@@ -849,4 +863,67 @@ button:active {
 
 #span_p2_respondida {
     display: none;
+}
+
+#especime {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    background-color: #303030;
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px;
+    height: auto;
+    border-width: 5px 3px 0px 3px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 50px 10px 50px 10px;
+    box-shadow: 0px 0px 20px 1000px rgba(255, 255, 255, 0.25);
+}
+
+#especime button {
+    width: 150px;
+}
+
+#especime .close button {
+    padding: 20px;
+    width: auto;
+    background-color: #00000000;
+    height: auto;
+    outline: none;
+    border: none;
+    border-width: none;
+    cursor: pointer;
+    font-size: 30px;
+    animation: none;
+}
+
+#especime .close button:hover {
+    transition: 0s;
+    box-shadow: none;
+}
+
+#especime .close button:active {
+    transition: 0s;
+    box-shadow: none;
+    transform: translateY(4px);
+}
+
+#especime .descricao {
+    background-color: #505050;
+    padding: 20px;
+    width: 80%;
+    height: 100px;
+    overflow-y: scroll;
+
+    border-width: 5px 3px 0px 3px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 50px 10px 50px 10px;
+    box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.25);
+    font-size: 20px;
+
 }

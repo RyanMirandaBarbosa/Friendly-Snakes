@@ -88,11 +88,18 @@
         </fieldset>
 
         <fieldset class="fieldset-padrao">
-            <legend class="legend-analytics">Analytics</legend>
+            <legend class="legend-analytics">Pesquisa</legend>
 
             <div class="dashboard">
                 <span>
-                    Como as pessoas se sentiam em relação as cobras antes de conhecer o projeto Friendly Snakes
+                    Aqui temos uma pesquisa focada no projeto para avaliar se a sua ação está surtindo efeito. Apresento
+                    dois gráficos de pesquisa: um com dados sobre como as pessoas se sentiam inicialmente e outro sobre
+                    como se sentem agora em relação às cobras. Para permitir a comparação, foi incluído um terceiro
+                    gráfico retomando essa análise comparativa.
+                </span>
+                <br><br><br>
+                <span>
+                    "Como as pessoas se sentiam em relação às cobras antes de conhecer o projeto Friendly Snakes?"
                 </span>
 
                 <div class="grafico-card">
@@ -102,7 +109,7 @@
                 </div>
 
                 <span>
-                    Como as pessoas se sentem em relação as cobras após conhecer e usar o projeto Friendly Snakes
+                    "Como as pessoas se sentem em relação às cobras após conhecer e utilizar o projeto Friendly Snakes?"
                 </span>
 
                 <div class="grafico-card">
@@ -135,7 +142,8 @@
     // document.addEventListener('DOMContentLoaded', function () {
     //     infGraficos();
     // });
-
+    const vt1 = [];
+    const vt2 = [];
 
 
     function infGraficos() {
@@ -152,8 +160,39 @@
                 console.log("ESTOU NO THEN DO infGraficos()!");
 
                 if (resposta.ok) {
+                    resposta.json().then(json => {
+
+                        sessionStorage.P1_MUITO_TRANQUILO = json.P1_muitoTranquilo;
+                        sessionStorage.P1_TRANQUILO = json.P1_tranquilo;
+                        sessionStorage.P1_NEUTRO = json.P1_neutro;
+                        sessionStorage.P1_MEDO = json.P1_medo;
+                        sessionStorage.P1_MUITO_MEDO = json.P1_muitoMedo;
+               
+                        vt1.push(json.P1_muitoTranquilo);
+                        vt1.push(json.P1_tranquilo);
+                        vt1.push(json.P1_neutro);
+                        vt1.push(json.P1_medo);
+                        vt1.push(json.P1_muitoMedo);
+
+                        sessionStorage.P2_MUITO_TRANQUILO = json.P2_muitoTranquilo;
+                        sessionStorage.P2_TRANQUILO = json.P2_tranquilo;
+                        sessionStorage.P2_NEUTRO = json.P2_neutro;
+                        sessionStorage.P2_MEDO = json.P2_medo;
+                        sessionStorage.P2_MUITO_MEDO = json.P2_muitoMedo;
+
+                        vt2.push(json.P2_muitoTranquilo);
+                        vt2.push(json.P2_tranquilo);
+                        vt2.push(json.P2_neutro);
+                        vt2.push(json.P2_medo);
+                        vt2.push(json.P2_muitoMedo);
+
+                        exibirGrafico()
+
+                        return json.resposta();
+                    })
                     // window.location = "./Sobre o Projeto.html";
-                    return resposta.json();
+
+
                 } else {
                     console.log("Houve um erro ao tentar puxar ifoGrafico!");
                     return resposta.text().then(function (texto) {
@@ -166,19 +205,7 @@
                 console.log(JSON.stringify(json));
 
                 // Certifique-se de validar as propriedades antes de acessá-las
-                if (json) {
-                    sessionStorage.P1_MUITO_TRANQUILO = json.P1_muitoTranquilo;
-                    sessionStorage.P1_TRANQUILO = json.P1_tranquilo;
-                    sessionStorage.P1_NEUTRO = json.P1_neutro;
-                    sessionStorage.P1_MEDO = json.P1_medo;
-                    sessionStorage.P1_MUITO_MEDO = json.P1_muitoMedo;
 
-                    sessionStorage.P2_MUITO_TRANQUILO = json.P2_muitoTranquilo;
-                    sessionStorage.P2_TRANQUILO = json.P2_tranquilo;
-                    sessionStorage.P2_NEUTRO = json.P2_neutro;
-                    sessionStorage.P2_MEDO = json.P2_medo;
-                    sessionStorage.P2_MUITO_MEDO = json.P2_muitoMedo;
-                }
             })
             .catch(function (erro) {
                 console.log(erro);
@@ -186,104 +213,106 @@
             });
     }
 
-    
-    var p1_muito_tranquilo = Number(sessionStorage.P1_MUITO_TRANQUILO);
-    var p1_tranquilo = Number(sessionStorage.P1_TRANQUILO);
-    var p1_neutro = Number(sessionStorage.P1_NEUTRO);
-    var p1_medo = Number(sessionStorage.P1_MEDO);
-    var p1_muito_medo = Number(sessionStorage.P1_MUITO_MEDO);
 
-    var p2_muito_tranquilo = Number(sessionStorage.P2_MUITO_TRANQUILO);
-    var p2_tranquilo = Number(sessionStorage.P2_TRANQUILO);
-    var p2_neutro = Number(sessionStorage.P2_NEUTRO);
-    var p2_medo = Number(sessionStorage.P2_MEDO);
-    var p2_muito_medo = Number(sessionStorage.P2_MUITO_MEDO);
+    function exibirGrafico() {
+        // var p1_muito_tranquilo = Number(sessionStorage.P1_MUITO_TRANQUILO);
+        // var p1_tranquilo = Number(sessionStorage.P1_TRANQUILO);
+        // var p1_neutro = Number(sessionStorage.P1_NEUTRO);
+        // var p1_medo = Number(sessionStorage.P1_MEDO);
+        // var p1_muito_medo = Number(sessionStorage.P1_MUITO_MEDO);
 
-    nome_usuario_menu.innerHTML = `${nome} ${sobrenome}`;
+        // var p2_muito_tranquilo = Number(sessionStorage.P2_MUITO_TRANQUILO);
+        // var p2_tranquilo = Number(sessionStorage.P2_TRANQUILO);
+        // var p2_neutro = Number(sessionStorage.P2_NEUTRO);
+        // var p2_medo = Number(sessionStorage.P2_MEDO);
+        // var p2_muito_medo = Number(sessionStorage.P2_MUITO_MEDO);
 
-    const ctx1 = document.getElementById('myChart1');
-    const ctx2 = document.getElementById('myChart2');
-    const ctx3 = document.getElementById('myChart3');
-    Chart.defaults.color = '#ffffff';
-    Chart.defaults.font.size = 15;
+        nome_usuario_menu.innerHTML = `${nome} ${sobrenome}`;
+
+        const ctx1 = document.getElementById('myChart1');
+        const ctx2 = document.getElementById('myChart2');
+        const ctx3 = document.getElementById('myChart3');
+        Chart.defaults.color = '#ffffff';
+        Chart.defaults.font.size = 15;
 
 
-    new Chart(ctx1, {
-        type: 'pie',
-        data: {
-            labels: [
-                'Muito Tranquilo',
-                'Tranquilo',
-                'Neutro',
-                'Medo',
-                'Muito Medo'
-            ],
-            datasets: [{
-                label: 'Quantidade de Pessoas',
-                data: [p1_muito_tranquilo, p1_tranquilo, p1_neutro, p1_medo, p1_muito_medo],
-                backgroundColor: [
-                    '#457fde',
-                    '#45de5c',
-                    '#d1de45',
-                    '#de8745',
-                    '#de4545'
+        new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: [
+                    'Muito Tranquilo',
+                    'Tranquilo',
+                    'Neutro',
+                    'Medo',
+                    'Muito Medo'
                 ],
-            }]
-        }
-    });
-
-    new Chart(ctx2, {
-        type: 'pie',
-        data: {
-            labels: [
-                'Muito Tranquilo',
-                'Tranquilo',
-                'Neutro',
-                'Medo',
-                'Muito Medo'
-            ],
-            datasets: [{
-                label: 'Quantidade de Pessoas',
-                data: [p2_muito_tranquilo, p2_tranquilo, p2_neutro, p2_medo, p2_muito_medo],
-                backgroundColor: [
-                    '#457fde',
-                    '#45de5c',
-                    '#d1de45',
-                    '#de8745',
-                    '#de4545'
-                ],
-            }]
-        }
-    });
-
-    new Chart(ctx3, {
-        type: 'bar',
-        data: {
-            labels: ['Muito Tranquilo', 'Tranquilo', 'Neutro', 'Medo', 'Muito Medo'],
-            datasets: [{
-                label: 'Antes',
-                data: [p1_muito_tranquilo, p1_tranquilo, p1_neutro, p1_medo, p1_muito_medo],
-                backgroundColor: ['#de4545'],
-                borderColor: ['#ffffff'],
-                borderWidth: 3
-            },
-            {
-                label: 'Depois',
-                data: [p2_muito_tranquilo, p2_tranquilo, p2_neutro, p2_medo, p2_muito_medo],
-                backgroundColor: ['#457fde'],
-                borderColor: ['#ffffff'],
-                borderWidth: 3
+                datasets: [{
+                    label: 'Quantidade de Pessoas',
+                    data: vt1,
+                    backgroundColor: [
+                        '#457fde',
+                        '#45de5c',
+                        '#d1de45',
+                        '#de8745',
+                        '#de4545'
+                    ],
+                }]
             }
-            ]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+        });
+
+        new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: [
+                    'Muito Tranquilo',
+                    'Tranquilo',
+                    'Neutro',
+                    'Medo',
+                    'Muito Medo'
+                ],
+                datasets: [{
+                    label: 'Quantidade de Pessoas',
+                    data: vt2,
+                    backgroundColor: [
+                        '#457fde',
+                        '#45de5c',
+                        '#d1de45',
+                        '#de8745',
+                        '#de4545'
+                    ],
+                }]
+            }
+        });
+
+        new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: ['Muito Tranquilo', 'Tranquilo', 'Neutro', 'Medo', 'Muito Medo'],
+                datasets: [{
+                    label: 'Antes',
+                    data: vt1,
+                    backgroundColor: ['#de4545'],
+                    borderColor: ['#ffffff'],
+                    borderWidth: 3
+                },
+                {
+                    label: 'Depois',
+                    data: vt2,
+                    backgroundColor: ['#457fde'],
+                    borderColor: ['#ffffff'],
+                    borderWidth: 3
+                }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
+        });
+    }
 
 </script>
 

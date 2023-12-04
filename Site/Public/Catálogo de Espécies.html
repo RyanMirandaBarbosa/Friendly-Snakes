@@ -21,7 +21,7 @@
     <title>Espécies | Friendly Snakes</title>
 </head>
 
-<body>
+<body onload="exibirDesx()">
     <header>
 
         <div class="container-header-itens">
@@ -60,37 +60,23 @@
 
     <div class="tela">
 
-        <div class="catalogo">
+        <div id="especime">
 
-            <div class="dex">
-                <img src="./Assets/Especies/jiboia bcc.jpeg" alt="">
-                <span class="nome">Jiboia BCC</span>
-            </div>
-            <div class="dex">
-                <img src="./Assets/Especies/sucuri verde.jfif" alt="">
-                <span class="nome">Sucuri-verde</span>
-            </div>
-            <div class="dex">
-                <img src="./Assets/Especies/araramboia.jpg" alt="">
-                <span class="nome">Araramboia</span>
-            </div>
-            <div class="dex">
-                <img src="./Assets/Especies/jiboia arco iris da caatinga.jpg" alt="">
-                <span class="nome">Jiboia arco iris da caatinga</span>
-            </div>
-            <div class="dex">
-                <img src="./Assets/Especies/surucucu.jpg" alt="">
-                <span class="nome">Surucucu</span>
-            </div>
-            <div class="dex">
-                <img src="./Assets/Especies/Coral-falsa.jpeg" alt="">
-                <span class="nome">Falsa coral</span>
-            </div>
-            <div class="dex">
-                <img src="./Assets/Especies/suaçubóia.jpg" alt="">
-                <span class="nome">Suaçubóia</span>
+            <div class="close">
+                <button onclick="fechar_dex()">
+                    <i class="bi bi-x-lg"></i>
+                </button>
             </div>
 
+            <span id="nome_dex" class="nome"></span>
+            <span id="nome_cien_dex" class="nome"></span>
+            <span id="familia_dex" class="nome"></span>
+            <div id="descricao_dex" class="nome descricao">
+            </div>
+            
+        </div>
+
+        <div id="catalogo" class="catalogo">
         </div>
 
     </div>
@@ -104,4 +90,56 @@
     var sobrenome = sessionStorage.SOBRENOME_USUARIO;
 
     nome_usuario_menu.innerHTML = `${nome} ${sobrenome}`;
+
+    var brasilDesx = [
+        ['Jiboia BCC', './Assets/Especies/jiboia bcc.jpg', 'Boa constrictor constrictor', '	Boidae', 'Comum entre os criadores e favorita por varios a BCC é um animal tranquilo que exige seus cuidados é claro. Esses animais atigem um tamanho entre 2 a 3 metros de comprimento pesando entre 10 e 15 kilos, são animais não pesonhentos e se alimentão de pequenos vertebradros.'],
+        ['Sucuri-verde', './Assets/Especies/sucuri verde.jpg'],
+        ['Araramboia', './Assets/Especies/araramboia.jpg'],
+        ['Jiboia arco iris da caatinga', './Assets/Especies/jiboia arco iris da caatinga.jpg'],
+        ['Surucucu', './Assets/Especies/surucucu.jpg'],
+        ['Barriga-de-xadrez', './Assets/Especies/Siphlophis cervinus.jpg'],
+        ['Suaçubóia', './Assets/Especies/suaçubóia.jpg']
+        ]
+
+        function exibirDesx() {
+        for (var i = 0; i < brasilDesx.length; i++) {
+            var dexAtual = brasilDesx[i];
+
+            var dexId = `dex_${i}`; // Adicione um identificador único para cada dex
+
+            catalogo.innerHTML += `
+            <div onclick="mostrar_dex(${i})" id="${dexId}" class="dex">
+                <img src="${dexAtual[1]}" alt="">
+                <span id="${dexAtual[0]}" class="nome">${dexAtual[0]}</span>
+            </div>
+            `;
+        }
+    }
+
+    function mostrar_dex(i) {
+        var dexAtual = brasilDesx[i];
+        nome_dex.innerHTML = `Nome:<br>${dexAtual[0]}`
+        nome_cien_dex.innerHTML = `Nomenclatura científica:<br>${dexAtual[2]}`
+        familia_dex.innerHTML = `Família:<br>${dexAtual[3]}`
+        descricao_dex.innerHTML = dexAtual[4]
+        // Atualize as informações da modal com base no índice
+        // dexAtual[1] contém o caminho da imagem
+
+        // Abra a modal
+        var dexModal = document.getElementById('especime');
+        dexModal.style.display = 'flex';
+    }
+
+    function fechar_dex() {
+        var dexModal = document.getElementById('especime');
+        dexModal.style.display = 'none';
+    }
+
+    // Adicione um evento de clique na área escura ao redor da modal para fechá-la
+    window.onclick = function(event) {
+        var dexModal = document.getElementById('especime');
+        if (event.target == dexModal) {
+            dexModal.style.display = 'none';
+        }
+    }
 </script>

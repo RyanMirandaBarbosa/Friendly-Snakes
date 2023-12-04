@@ -11,6 +11,7 @@ function infGraficos(req, res) {
             console.log(`Resultados: ${JSON.stringify(resultado)}`);
 
             if (resultado.length > 0) {
+                console.log("buralaburala" + resultado[0].P1_muitoTranquilo)
                 res.json({
                     P1_muitoTranquilo: resultado[0].P1_muitoTranquilo,
                     P1_tranquilo: resultado[0].P1_tranquilo,

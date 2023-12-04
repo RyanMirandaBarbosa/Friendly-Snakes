@@ -28,7 +28,6 @@ constraint fkUsuarioPesquisa2 foreign key (fkUsuario) references Usuario (idUsua
 
 create table Especies (
 idEspecies int primary key auto_increment,
--- salvar imagem da coitada salva com url da imagem varchar()
 nome varchar(45),
 nomeCientifico varchar(45),
 familia varchar(45),
@@ -63,16 +62,15 @@ describe Publicacao;
 describe Comentario;
 
 	SELECT 
-            Publicacao.idPublicaco,
+            Publicacao.idPublicacao,
             Publicacao.conteudo,
 			Publicacao.fkUsuario,
             Usuario.idUsuario,
             Usuario.nome,
-            Usuario.sobreNome,
-            u.senha
-        FROM aviso a
-            INNER JOIN usuario u
-                ON a.fk_usuario = u.id;
+            Usuario.sobreNome
+        FROM Publicacao
+            INNER JOIN Usuario
+                ON Publicacao.fkUsuario = Usuario.idUsuario;
 
 select * from Usuario;
 select * from Especies;
@@ -98,5 +96,6 @@ insert into Pesquisa1 values
 (null, 'Medo', null),
 (null, 'Medo', null),
 (null, 'Medo', null),
-(null, 'Muito Medo', null),(null, 'Muito Medo', null),(null, 'Muito Medo', null);
-
+(null, 'Muito Medo', null),
+(null, 'Muito Medo', null),
+(null, 'Muito Medo', null);
