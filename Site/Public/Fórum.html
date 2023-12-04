@@ -47,7 +47,7 @@
                             <li><a href="Perfil.html">Perfil</a></li>
                             <li><a href="Sobre o Projeto.html">Sobre o Projeto</a></li>
                             <li><a href="Conhecimento.html">Mitos & Conhecimento</a></li>
-                            <li><a href="Catálogo de Espécies.html">Especies Brasileiras</a></li>
+                            <li><a href="Catálogo de Espécies.html">Espécies Brasileiras</a></li>
                             <li><a href="Fórum.html">Forum</a></li>
                             <li><button class="button-sair" onclick="logout()">Sair</button></li>
                         </ul>
@@ -91,7 +91,7 @@
 </html>
 
 <script>
-    // exibir nome e sobrenome do user na modal
+    
     var nome = sessionStorage.NOME_USUARIO;
     var sobrenome = sessionStorage.SOBRENOME_USUARIO;
 
@@ -130,11 +130,8 @@
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-           
         });
-
         return false;
-
     }
 
     function atualizarFeed() {
@@ -143,11 +140,10 @@
                 if (resposta.status == 204) {
                     var feed = document.getElementById("publicacaoes_id");
                     var mensagem = document.createElement("span");
-                    // mensagem.innerHTML = "Nenhum resultado encontrado."
+
                     feed.appendChild(mensagem);
                     throw "Nenhum resultado encontrado!!";
                 }
-
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
 
@@ -156,50 +152,34 @@
                     for (let i = 0; i < resposta.length; i++) {
                         var publicacao = resposta[i];
 
-                        // Criando e manipulando elementos do HTML via JavaScript
+                        // Criando trem do HTML via JavaScript
                         var divPublicacao = document.createElement("div");
                         var divNome = document.createElement("div");
                         var divLine1 = document.createElement("div");
                         var divTextoPublicacao = document.createElement("div");
-                        // var divLine2 = document.createElement("div");
-                        // var divButtons = document.createElement("div");
-                        // var btnResponder = document.createElement("button");
 
                         divNome.innerHTML = `${publicacao.nome} ${publicacao.sobreNome}`; // Usando o nome do autor
                         divLine1.innerHTML = "";
                         divTextoPublicacao.innerHTML = publicacao.conteudo; // Usando a descrição da publicação
-                        // btnResponder.innerHTML = "Responder";
-                        // btnResponder.setAttribute("onclick", `responder(${publicacao.idPublicacao})`);
 
-                        // Adicionando classes aos elementos
                         divPublicacao.className = "public";
                         divNome.className = "nome";
                         divLine1.className = "line";
                         divTextoPublicacao.className = "texto-publicacao";
                         divLine1.className = "line";
-                        // divButtons.className = "div-buttons";
-                        // btnResponder.className = "publicacao-btn-editar";
 
-                        // Adicionando os elementos criados à estrutura
                         divPublicacao.appendChild(divNome);
                         divPublicacao.appendChild(divLine1);
                         divPublicacao.appendChild(divTextoPublicacao);
-                        // divPublicacao.appendChild(divLine2);
-                        // divPublicacao.appendChild(divButtons);
-                        // divButtons.appendChild(btnResponder);
 
-                        // Adicionando a publicação ao container
                         feedContainer.appendChild(divPublicacao);
                     }
-
-
                 });
             } else {
                 throw ('Houve um erro na API!');
             }
         }).catch(function (resposta) {
             console.error(resposta);
-
         });
     }
 

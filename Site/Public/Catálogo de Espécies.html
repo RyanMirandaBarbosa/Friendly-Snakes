@@ -47,7 +47,7 @@
                             <li><a href="Perfil.html">Perfil</a></li>
                             <li><a href="Sobre o Projeto.html">Sobre o Projeto</a></li>
                             <li><a href="Conhecimento.html">Mitos & Conhecimento</a></li>
-                            <li><a href="Catálogo de Espécies.html">Especies Brasileiras</a></li>
+                            <li><a href="Catálogo de Espécies.html">Espécies Brasileiras</a></li>
                             <li><a href="Fórum.html">Forum</a></li>
                             <li><button class="button-sair" onclick="logout()">Sair</button></li>
                         </ul>
@@ -85,7 +85,7 @@
 </html>
 
 <script>
-    // exibir nome e sobrenome do user na modal
+
     var nome = sessionStorage.NOME_USUARIO;
     var sobrenome = sessionStorage.SOBRENOME_USUARIO;
 
@@ -112,7 +112,7 @@
         for (var i = 0; i < brasilDesx.length; i++) {
             var dexAtual = brasilDesx[i];
 
-            var dexId = `dex_${i}`; // Adicione um identificador único para cada dex
+            var dexId = `dex_${i}`; // identificador único para cada dex
 
             catalogo.innerHTML += `
             <div onclick="mostrar_dex(${i})" id="${dexId}" class="dex">
@@ -138,15 +138,11 @@
     }
 
     function fechar_dex() {
-        var dexModal = document.getElementById('especime');
-        dexModal.style.display = 'none';
-    }
+        nome_dex.innerHTML = "";
+        nome_cien_dex.innerHTML = "";
+        familia_dex.innerHTML = "";
+        descricao_dex.innerHTML = "";
 
-    // Adicione um evento de clique na área escura ao redor da modal para fechá-la
-    window.onclick = function(event) {
-        var dexModal = document.getElementById('especime');
-        if (event.target == dexModal) {
-            dexModal.style.display = 'none';
-        }
+        especime.style.display = 'none';
     }
 </script>

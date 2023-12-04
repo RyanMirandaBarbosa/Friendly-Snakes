@@ -93,7 +93,6 @@ function responder(req, res) {
                 function (resultado) {
                     console.log("Pesquisa respondida com sucesso!");
                     res.json(resultado);
-                    // responderIdPesquisa(res);
                 }
             ).catch(
                 function (erro) {
@@ -119,7 +118,6 @@ function responder_p2(req, res) {
                 function (resultado) {
                     console.log("Pesquisa respondida com sucesso!");
                     res.json(resultado);
-                    // responder_p2IdPesquisa(res);
                 }
             ).catch(
                 function (erro) {

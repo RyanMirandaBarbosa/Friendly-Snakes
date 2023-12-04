@@ -26,16 +26,6 @@ fkUsuario int,
 constraint fkUsuarioPesquisa2 foreign key (fkUsuario) references Usuario (idUsuario)
 );
 
-create table Especies (
-idEspecies int primary key auto_increment,
-nome varchar(45),
-nomeCientifico varchar(45),
-familia varchar(45),
-descricao varchar(999),
-fkUsuario int,
-constraint fkUsuarioEspecieFav foreign key (fkUsuario) references Usuario(idUsuario)
-);
-
 create table Publicacao (
 idPublicacao int auto_increment,
 fkUsuario int,
@@ -44,58 +34,89 @@ conteudo varchar(999),
 primary key (idPublicacao, fkUsuario)
 );
 
-create table Comentario (
-idComentario int auto_increment,
-fkUsuario int,
-constraint fkUsuarioComentario foreign key (fkUsuario) references Usuario (idUsuario),
-fkPublicacao int,
-constraint fkPublicacaoComentario foreign key (fkPublicacao) references Usuario (idUsuario),
-comentario varchar(250),
-primary key (idComentario, fkUsuario, fkPublicacao)
-);
-
 describe Usuario;
 describe Pesquisa1;
 describe Pesquisa2;
-describe Especies;
 describe Publicacao;
-describe Comentario;
-
-	SELECT 
-            Publicacao.idPublicacao,
-            Publicacao.conteudo,
-			Publicacao.fkUsuario,
-            Usuario.idUsuario,
-            Usuario.nome,
-            Usuario.sobreNome
-        FROM Publicacao
-            INNER JOIN Usuario
-                ON Publicacao.fkUsuario = Usuario.idUsuario;
 
 select * from Usuario;
-select * from Especies;
 select * from Pesquisa1;
 select * from Pesquisa2;
 select * from Publicacao;
-select * from Comentario;
 
-select resposta, count(*) as 'total' from Pesquisa1 group by resposta; -- where pesquisa = 'Neutro';
-SELECT resposta, COUNT(*) AS 'total' FROM Pesquisa1 WHERE resposta = 'Muito Medo' GROUP BY resposta;
-SELECT resposta, COUNT(*) AS 'total' FROM Pesquisa1 WHERE resposta = 'Medo' GROUP BY resposta;
-SELECT resposta, COUNT(*) AS 'total' FROM Pesquisa1 WHERE resposta = 'Neutro' GROUP BY resposta;
-SELECT resposta, COUNT(*) AS 'total' FROM Pesquisa1 WHERE resposta = 'Tranquilo' GROUP BY resposta;
-SELECT resposta, COUNT(*) AS 'total' FROM Pesquisa1 WHERE resposta = 'Muito Tranquilo' GROUP BY resposta;
-
+-- select resposta, count(*) as 'total' from Pesquisa2 group by resposta; 
+-- SELECT resposta, COUNT(*) AS 'total' FROM Pesquisa1 WHERE resposta = 'Muito Medo' GROUP BY resposta;
+-- SELECT resposta, COUNT(*) AS 'total' FROM Pesquisa1 WHERE resposta = 'Medo' GROUP BY resposta;
+-- SELECT resposta, COUNT(*) AS 'total' FROM Pesquisa1 WHERE resposta = 'Neutro' GROUP BY resposta;
+-- SELECT resposta, COUNT(*) AS 'total' FROM Pesquisa1 WHERE resposta = 'Tranquilo' GROUP BY resposta;
+-- ELECT resposta, COUNT(*) AS 'total' FROM Pesquisa1 WHERE resposta = 'Muito Tranquilo' GROUP BY resposta;
 
 insert into Pesquisa1 values
+(null, 'Muito Tranquilo', null),
+(null, 'Muito Tranquilo', null),
+
 (null, 'Tranquilo', null),
 (null, 'Tranquilo', null),
 (null, 'Tranquilo', null),
+
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+
 (null, 'Medo', null),
 (null, 'Medo', null),
 (null, 'Medo', null),
 (null, 'Medo', null),
 (null, 'Medo', null),
+(null, 'Medo', null),
+(null, 'Medo', null),
+
 (null, 'Muito Medo', null),
 (null, 'Muito Medo', null),
+(null, 'Muito Medo', null),
+(null, 'Muito Medo', null);
+
+insert into Pesquisa2 values
+(null, 'Muito Tranquilo', null),
+(null, 'Muito Tranquilo', null),
+(null, 'Muito Tranquilo', null),
+(null, 'Muito Tranquilo', null),
+(null, 'Muito Tranquilo', null),
+
+(null, 'Tranquilo', null),
+(null, 'Tranquilo', null),
+(null, 'Tranquilo', null),
+(null, 'Tranquilo', null),
+(null, 'Tranquilo', null),
+(null, 'Tranquilo', null),
+(null, 'Tranquilo', null),
+(null, 'Tranquilo', null),
+(null, 'Tranquilo', null),
+
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+(null, 'Neutro', null),
+
+(null, 'Medo', null),
+(null, 'Medo', null),
+(null, 'Medo', null),
+(null, 'Medo', null),
+(null, 'Medo', null),
+
 (null, 'Muito Medo', null);

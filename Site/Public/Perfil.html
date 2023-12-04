@@ -47,7 +47,7 @@
                             <li><a href="Perfil.html">Perfil</a></li>
                             <li><a href="Sobre o Projeto.html">Sobre o Projeto</a></li>
                             <li><a href="Conhecimento.html">Mitos & Conhecimento</a></li>
-                            <li><a href="Catálogo de Espécies.html">Especies Brasileiras</a></li>
+                            <li><a href="Catálogo de Espécies.html">Espécies Brasileiras</a></li>
                             <li><a href="Fórum.html">Forum</a></li>
                             <li><button class="button-sair" onclick="logout()">Sair</button></li>
                         </ul>
@@ -162,7 +162,7 @@
 </html>
 
 <script>
-    // exibir nome e sobrenome do user na modal
+    
     var nome = sessionStorage.NOME_USUARIO;
     var sobrenome = sessionStorage.SOBRENOME_USUARIO;
     var idUsuario = sessionStorage.ID_USUARIO;
@@ -299,10 +299,10 @@
                         p1_respondida();
                         return resposta.json();
                     }
-                    throw new Error("Houve um erro ao tentar realizar o cadastro!");
+                    throw new Error("Houve um erro ao tentar validar_p1");
                 })
                 .then(dados => {
-                    console.log("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+                    console.log("validar_p1 sucess!");
                 })
                 .catch(erro => {
                     console.error(`#ERRO: ${erro.message}`);
@@ -364,10 +364,10 @@
                         p2_respondida();
                         return resposta.json();
                     }
-                    throw new Error("Houve um erro ao tentar realizar o cadastro!");
+                    throw new Error("Houve um erro ao tentar alidar_p2");
                 })
                 .then(dados => {
-                    console.log("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+                    console.log("validar_p2 sucess!");
                 })
                 .catch(erro => {
                     console.error(`#ERRO: ${erro.message}`);

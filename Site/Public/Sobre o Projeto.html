@@ -51,7 +51,7 @@
                             <li><a href="Perfil.html">Perfil</a></li>
                             <li><a href="Sobre o Projeto.html">Sobre o Projeto</a></li>
                             <li><a href="Conhecimento.html">Mitos & Conhecimento</a></li>
-                            <li><a href="Catálogo de Espécies.html">Especies Brasileiras</a></li>
+                            <li><a href="Catálogo de Espécies.html">Espécies Brasileiras</a></li>
                             <li><a href="Fórum.html">Forum</a></li>
                             <li><button class="button-sair" onclick="logout()">Sair</button></li>
                         </ul>
@@ -126,7 +126,16 @@
                     <div class="grafico-comparativo">
                         <canvas id="myChart3"></canvas>
                     </div>
+
+                    <div class="texto">
+                        <span id="kpi_1"></span><br><br>
+                        <span id="kpi_2"></span><br><br>
+                        <span id="kpi_3"></span><br><br>
+                        <span id="kpi_4"></span><br><br>
+                        <span id="kpi_5"></span><br><br>
+                    </div>
                 </div>
+
 
             </div>
 
@@ -135,16 +144,14 @@
 </body>
 
 <script>
-    // exibir nome e sobrenome do user na modal
+    
     var nome = sessionStorage.NOME_USUARIO;
     var sobrenome = sessionStorage.SOBRENOME_USUARIO;
 
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     infGraficos();
-    // });
+    nome_usuario_menu.innerHTML = `${nome} ${sobrenome}`;
+
     const vt1 = [];
     const vt2 = [];
-
 
     function infGraficos() {
         fetch("/grafico/infGraficos", {
@@ -153,12 +160,10 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                // Adicione dados para enviar ao servidor, se necessário
             })
         })
             .then(function (resposta) {
                 console.log("ESTOU NO THEN DO infGraficos()!");
-
                 if (resposta.ok) {
                     resposta.json().then(json => {
 
@@ -167,7 +172,7 @@
                         sessionStorage.P1_NEUTRO = json.P1_neutro;
                         sessionStorage.P1_MEDO = json.P1_medo;
                         sessionStorage.P1_MUITO_MEDO = json.P1_muitoMedo;
-               
+
                         vt1.push(json.P1_muitoTranquilo);
                         vt1.push(json.P1_tranquilo);
                         vt1.push(json.P1_neutro);
@@ -190,9 +195,6 @@
 
                         return json.resposta();
                     })
-                    // window.location = "./Sobre o Projeto.html";
-
-
                 } else {
                     console.log("Houve um erro ao tentar puxar ifoGrafico!");
                     return resposta.text().then(function (texto) {
@@ -203,31 +205,14 @@
             .then(function (json) {
                 console.log(json);
                 console.log(JSON.stringify(json));
-
-                // Certifique-se de validar as propriedades antes de acessá-las
-
             })
             .catch(function (erro) {
                 console.log(erro);
-                // Adicione lógica para lidar com erros, se necessário
             });
     }
 
 
     function exibirGrafico() {
-        // var p1_muito_tranquilo = Number(sessionStorage.P1_MUITO_TRANQUILO);
-        // var p1_tranquilo = Number(sessionStorage.P1_TRANQUILO);
-        // var p1_neutro = Number(sessionStorage.P1_NEUTRO);
-        // var p1_medo = Number(sessionStorage.P1_MEDO);
-        // var p1_muito_medo = Number(sessionStorage.P1_MUITO_MEDO);
-
-        // var p2_muito_tranquilo = Number(sessionStorage.P2_MUITO_TRANQUILO);
-        // var p2_tranquilo = Number(sessionStorage.P2_TRANQUILO);
-        // var p2_neutro = Number(sessionStorage.P2_NEUTRO);
-        // var p2_medo = Number(sessionStorage.P2_MEDO);
-        // var p2_muito_medo = Number(sessionStorage.P2_MUITO_MEDO);
-
-        nome_usuario_menu.innerHTML = `${nome} ${sobrenome}`;
 
         const ctx1 = document.getElementById('myChart1');
         const ctx2 = document.getElementById('myChart2');
@@ -312,8 +297,53 @@
                 }
             }
         });
+
+        exibirKpi();
     }
 
+    function exibirKpi() {
+        var p1_muito_tranquilo = Number(sessionStorage.P1_MUITO_TRANQUILO);
+        var p1_tranquilo = Number(sessionStorage.P1_TRANQUILO);
+        var p1_neutro = Number(sessionStorage.P1_NEUTRO);
+        var p1_medo = Number(sessionStorage.P1_MEDO);
+        var p1_muito_medo = Number(sessionStorage.P1_MUITO_MEDO);
+
+        var p2_muito_tranquilo = Number(sessionStorage.P2_MUITO_TRANQUILO);
+        var p2_tranquilo = Number(sessionStorage.P2_TRANQUILO);
+        var p2_neutro = Number(sessionStorage.P2_NEUTRO);
+        var p2_medo = Number(sessionStorage.P2_MEDO);
+        var p2_muito_medo = Number(sessionStorage.P2_MUITO_MEDO);
+
+        if (p1_muito_tranquilo > p2_muito_tranquilo) {
+            kpi_1.innerHTML = `Queda na quantidade de pessoas muito tranquilias de ${p1_muito_tranquilo - p2_muito_tranquilo} pessoas.`;
+        } else {
+            kpi_1.innerHTML = `Aumento na quantidade de pessoas muito tranquiulas de ${p2_muito_tranquilo - p1_muito_tranquilo} pessoas.`;
+        }
+
+        if (p1_tranquilo > p2_tranquilo) {
+            kpi_2.innerHTML = `Queda na quantidade de pessoas tranquilias de ${p1_tranquilo - p2_tranquilo} pessoas.`;
+        } else {
+            kpi_2.innerHTML = `Aumento na quantidade de pessoas tranquiulas de ${p2_tranquilo - p1_tranquilo} pessoas.`;
+        }
+
+        if (p1_neutro > p2_neutro) {
+            kpi_3.innerHTML = `Queda na quantidade de pessoas neutras de ${p1_neutro - p2_neutro} pessoas.`;
+        } else {
+            kpi_3.innerHTML = `Aumento na quantidade de pessoas neutras de ${p2_neutro - p1_neutro} pessoas.`;
+        }
+
+        if (p1_medo > p2_medo) {
+            kpi_4.innerHTML = `Queda na quantidade de pessoas com medo de ${p1_medo - p2_medo} pessoas.`;
+        } else {
+            kpi_4.innerHTML = `Aumento na quantidade de pessoas com medo de ${p2_medo - p1_medo} pessoas.`;
+        }
+
+        if (p1_muito_medo > p2_muito_medo) {
+            kpi_5.innerHTML = `Queda na quantidade de pessoas muito medo de ${p1_muito_medo - p2_muito_medo} pessoas.`;
+        } else {
+            kpi_5.innerHTML = `Aumento na quantidade de pessoas muito medo de ${p2_muito_medo - p1_muito_medo} pessoas.`;
+        }
+    }
 </script>
 
 </html>

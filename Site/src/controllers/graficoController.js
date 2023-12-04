@@ -1,7 +1,6 @@
 var graficoModel = require("../models/graficoModel");
 
 function infGraficos(req, res) {
-    // Adicione a lógica para obter informações do usuário autenticado, se necessário
     const email = req.body.email;
     const senha = req.body.senha;
 

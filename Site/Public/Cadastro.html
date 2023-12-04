@@ -220,7 +220,7 @@
                     throw new Error("Houve um erro ao tentar realizar o cadastro!");
                 })
                 .then(dados => {
-                    // Processar os dados retornados em caso de sucesso (se necessário)
+
                     console.log("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
 
                     setTimeout(() => {
@@ -232,7 +232,6 @@
                     // Tratar os erros
                     console.error(`#ERRO: ${erro.message}`);
                 });
-
             return false;
         }
     }
