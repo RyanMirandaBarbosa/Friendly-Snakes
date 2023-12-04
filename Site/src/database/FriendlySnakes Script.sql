@@ -1,5 +1,5 @@
 create database FriendlySnakes;
-
+-- drop database friendlysnakes;
 use FriendlySnakes;
 
 create table Usuario (
